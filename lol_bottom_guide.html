@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>바텀 라인전 고수 노트</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+  :root {
+    --bg: #0a0c10;
+    --surface: #0f1318;
+    --surface2: #151a22;
+    --border: #1e2530;
+    --gold: #c8aa6e;
+    --gold-dim: #785a28;
+    --blue: #0ac8b9;
+    --blue-dim: #0a6e68;
+    --text: #d4c4a0;
+    --text-dim: #7a7060;
+    --text-muted: #4a4840;
+    --red: #e84057;
+    --green: #3ac85a;
+    --purple: #9f6ef5;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    background: linear-gradient(180deg, #060810 0%, #0a0c10 100%);
+    border-bottom: 1px solid var(--gold-dim);
+    padding: 28px 0 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .emblem {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .header-text h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+  }
+
+  .header-text p {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ─── TABS ─── */
+  .tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: none;
+  }
+
+  .tab {
+    padding: 10px 22px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dim);
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  .tab:hover { color: var(--text); }
+
+  .tab.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ─── MAIN ─── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 24px;
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ─── SEARCH & FILTER ─── */
+  .controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+    max-width: 340px;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  .search-input {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 9px 12px 9px 36px;
+    color: var(--text);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-input::placeholder { color: var(--text-muted); }
+  .search-input:focus { border-color: var(--gold-dim); }
+
+  .filters {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 6px 13px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.18s;
+    white-space: nowrap;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--gold-dim);
+    color: var(--text);
+  }
+
+  .filter-btn.active {
+    background: var(--gold-dim);
+    border-color: var(--gold-dim);
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ─── STATS BAR ─── */
+  .stats-bar {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    letter-spacing: 0.04em;
+  }
+
+  .stats-bar span {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ─── CARDS GRID ─── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 14px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 18px;
+    transition: border-color 0.2s, transform 0.15s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--topic-color, var(--gold-dim));
+    border-radius: 6px 0 0 6px;
+  }
+
+  .card:hover {
+    border-color: var(--gold-dim);
+    transform: translateY(-1px);
+  }
+
+  .card-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--topic-color, var(--gold));
+    background: color-mix(in srgb, var(--topic-color, var(--gold)) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--topic-color, var(--gold)) 30%, transparent);
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-bottom: 9px;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #e8dcc0;
+    margin-bottom: 7px;
+    line-height: 1.3;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: #8a8070;
+    line-height: 1.65;
+    white-space: pre-line;
+  }
+
+  .card.hidden { display: none; }
+
+  /* ─── TOPIC COLOR MAP ─── */
+  .topic-딜교환 { --topic-color: #e84057; }
+  .topic-라인전 { --topic-color: #c8aa6e; }
+  .topic-레벨관리 { --topic-color: #3ac85a; }
+  .topic-매치업 { --topic-color: #9f6ef5; }
+  .topic-미니언관리 { --topic-color: #0ac8b9; }
+  .topic-생존 { --topic-color: #e84057; }
+  .topic-서포터운영 { --topic-color: #3ac85a; }
+  .topic-스킬활용 { --topic-color: #9f6ef5; }
+  .topic-시야 { --topic-color: #0ac8b9; }
+  .topic-오브젝트 { --topic-color: #c8aa6e; }
+  .topic-운영 { --topic-color: #c8aa6e; }
+  .topic-정글의식 { --topic-color: #f0a050; }
+  .topic-정보은닉 { --topic-color: #9f6ef5; }
+  .topic-챔피언활용 { --topic-color: #e84057; }
+  .topic-포지셔닝 { --topic-color: #0ac8b9; }
+  .topic-포탑 { --topic-color: #f0a050; }
+  .topic-심리전 { --topic-color: #9f6ef5; }
+
+  /* ─── IMAGE TAB ─── */
+  .image-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .image-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .image-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .image-card:hover { border-color: var(--blue-dim); }
+
+  .image-placeholder {
+    background: var(--surface2);
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .image-card-body {
+    padding: 14px 16px;
+  }
+
+  .image-card-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--blue);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .image-card-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    white-space: pre-line;
+  }
+
+  .image-card-extra {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--gold);
+    white-space: pre-line;
+    line-height: 1.55;
+  }
+
+  /* ─── CHAMP TAB ─── */
+  .champ-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .champ-header {
+    background: var(--surface2);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .champ-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .champ-name {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .champ-body {
+    padding: 18px 20px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px 24px;
+  }
+
+  .champ-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-top: 2px;
+    white-space: nowrap;
+  }
+
+  .combo-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .combo-badge {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 3px 9px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--blue);
+    letter-spacing: 0.05em;
+    font-family: 'Courier New', monospace;
+  }
+
+  .tip-text {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.65;
+    white-space: pre-line;
+  }
+
+  /* ─── SUP TAB ─── */
+  .sup-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--red);
+    border-radius: 6px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+
+  .sup-champ {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--red);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sup-champ::before {
+    content: '상대';
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    background: color-mix(in srgb, var(--red) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--red) 30%, transparent);
+    color: var(--red);
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+
+  .sup-content {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+    white-space: pre-line;
+  }
+
+  /* ─── EMPTY STATE ─── */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  .empty-state .icon { font-size: 32px; margin-bottom: 12px; }
+
+  /* ─── DIVIDER ─── */
+  .section-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 28px 0;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="emblem">⚔️</div>
+      <div class="header-text">
+        <h1>바텀 라인전 고수 노트</h1>
+        <p>League of Legends · ADC &amp; Support · Bottom Lane</p>
+      </div>
+    </div>
+    <nav class="tabs">
+      <div class="tab active" data-tab="concepts">📋 개념 정리</div>
+      <div class="tab" data-tab="images">🗺️ 포지셔닝 메모</div>
+      <div class="tab" data-tab="champs">🏹 챔피언별 팁</div>
+      <div class="tab" data-tab="sup">🛡️ 상대 서포터 대응</div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ───────── TAB 1: 개념 정리 ───────── -->
+  <div class="tab-content active" id="tab-concepts">
+    <div class="controls">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input class="search-input" id="conceptSearch" type="text" placeholder="개념 검색...">
+      </div>
+      <div class="filters" id="conceptFilters"></div>
+    </div>
+    <div class="stats-bar" id="conceptStats"></div>
+    <div class="cards-grid" id="conceptCards"></div>
+    <div class="empty-state" id="conceptEmpty" style="display:none">
+      <div class="icon">🔎</div>
+      검색 결과가 없습니다
+    </div>
+  </div>
+
+  <!-- ───────── TAB 2: 이미지 메모 ───────── -->
+  <div class="tab-content" id="tab-images">
+    <div class="image-section-title">포지셔닝 &amp; 와드 위치 메모</div>
+    <div class="image-cards" id="imageCards"></div>
+  </div>
+
+  <!-- ───────── TAB 3: 챔피언 ───────── -->
+  <div class="tab-content" id="tab-champs">
+    <div id="champBlocks"></div>
+  </div>
+
+  <!-- ───────── TAB 4: 상대 서포터 ───────── -->
+  <div class="tab-content" id="tab-sup">
+    <div class="image-section-title">상대 서포터 대응법</div>
+    <div id="supCards"></div>
+  </div>
+
+</main>
+
+<script>
+// ═══════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════
+const DATA = {
+  text: [
+    {"주제":"딜교환","핵심내용":"맞으면 같이 때리기","세부설명":"상대가 나를 때렸다면 가능하면 즉시 반격하여 일방적인 손해를 보지 않는다."},
+    {"주제":"딜교환","핵심내용":"지속 교전 가치 계산","세부설명":"스킬이 빠졌더라도 평타와 치속 등 지속 화력이 강하면 교전을 이어가는 것을 고려한다."},
+    {"주제":"딜교환","핵심내용":"삼각형 딜교 활용","세부설명":"일방적으로 때릴 수 있을 때는 계속 압박하되, 상대가 역으로 삼각형 구도를 만들려 하면 즉시 빠진다."},
+    {"주제":"딜교환","핵심내용":"우리 서폿이 원거리일 때","세부설명":"우리 서폿이 원거리 서폿이고 만약에 상대가 그랩으로 서폿을 끌었을 경우 나는 상대의 원딜을 때리면서 상대 원딜이 호응을 할 수 없게 견제"},
+    {"주제":"라인전","핵심내용":"선푸쉬 후 웨이브 관리","세부설명":"선푸쉬를 잡았다면 라인을 급하게 밀지 말고 웨이브를 쌓으며 천천히 압박한다."},
+    {"주제":"라인전","핵심내용":"유리할 때 라인 걸치기","세부설명":"반반 라인을 유지하며 상대 CS를 방해한다. 강한 타이밍에는 라인을 걸쳐 상대가 미니언을 먹기 어렵게 만든다."},
+    {"주제":"라인전","핵심내용":"받아먹는 상황 활용","세부설명":"상대가 선푸쉬 중이라도 라인을 걸칠 수 있다면 상대를 불편하게 만든다. 상대가 선을 넘으며 딜교를 시도하면 같이 응징한다."},
+    {"주제":"라인전","핵심내용":"슬로우푸쉬 후 빠른 푸쉬 전환","세부설명":"웨이브가 상대 포탑에 도달하면 빠르게 밀어 넣어야 한다. 천천히 밀면 상대가 먼저 3레벨을 찍어 레벨 우위를 가져갈 수 있다."},
+    {"주제":"라인전","핵심내용":"라인전 시 포지셔닝","세부설명":"라인전을 할 땐 한쪽을 등지면서 하라 → 벽에 가깝게 무빙을 쳐라\n가운데에서 딜교시 도망갈 곳이 없어지며 불리해짐"},
+    {"주제":"라인전","핵심내용":"슬로우 푸쉬 후 3렙 주도권","세부설명":"라인이 유리해서 슬로우푸쉬를 했다면 결국 걸쳐지는 라인에서 상대가 선 3렙을 찍게 됨\n그래서 그 상황에선 빠르게 라인을 밀며 3렙을 빨리 찍으려고 해야함"},
+    {"주제":"라인전","핵심내용":"상대 원딜 고립 압박","세부설명":"내가 매우 유리하고 상대 정글·서폿 위치는 확인되었지만 원딜 위치만 모를 경우, 상대 원거리 미니언 라인을 넘어 상대 원딜을 찾아 압박할 수 있다."},
+    {"주제":"라인전","핵심내용":"상대의 초반 압박 대응","세부설명":"게임 시작 후 상대가 첫번째 부쉬를 먹을만큼 강한 조합일 땐 우리의 근거리 미니언과 같이 이동하며 첫부쉬에 와드를 박으며\n상대가 딜교를 걸려고 할 시 우리가 박은 와드로 인해 어그로가 끌리는 점을 이용하여 딜교해서 이득보기"},
+    {"주제":"라인전","핵심내용":"양각 포지션","세부설명":"원딜과 서폿의 거리를 양각으로 넓게 서야 상대의 무빙이 가운데로 제한되면서 스킬을 맞추기 수월해짐"},
+    {"주제":"레벨 관리","핵심내용":"6레벨 타이밍 체크","세부설명":"아군과 적군의 6레벨 타이밍을 항상 확인하여 궁극기 변수에 대비한다."},
+    {"주제":"매치업","핵심내용":"그랩 챔피언 상대법","세부설명":"1레벨부터 무리하게 압박하지 말고 끌릴 각 자체를 주지 않는다."},
+    {"주제":"매치업","핵심내용":"일방적 압박 시 렌즈 활용","세부설명":"초반부터 일방적으로 압박 가능한 구도라면 1레벨 렌즈 선택도 고려한다."},
+    {"주제":"미니언 관리","핵심내용":"이득보는 집 타이밍","세부설명":"미드에서 리셋되는 대포웨이브에서는 집을 가도 괜찮다"},
+    {"주제":"미니언 관리","핵심내용":"집 심리전","세부설명":"상대가 집을 갔는지 안 갔는지 필드 시야를 통해 앞으로 가서 확인을 한 뒤 (물론 상대 서폿 위치를 내가 알고 있다는 가정하에)\n상대가 집을 갔다면 빨리 밀기 OR 상대가 아직 집을 가지 않았다면 슬로우푸쉬"},
+    {"주제":"미니언 관리","핵심내용":"원거리 미니언 어그로 해제","세부설명":"원거리 미니언 3마리 이상에게 공격받고 있다면 적 미니언을 한 대 공격해 어그로를 해제한다."},
+    {"주제":"미니언 관리","핵심내용":"상대의 제스처를 확인","세부설명":"상대 원딜의 제스처를 보고 빠르게 밀지 천천히 밀지 정하라\n상대가 나한테 스킬을 털었다? → 너 라인 밀 생각 없구나, 내가 주도권 잡고 슬로우푸쉬해줄게"},
+    {"주제":"미니언 관리","핵심내용":"라인을 당기고 싶을 때","세부설명":"라인을 당기려면 근거리+원거리가 있는 상황에서 원거리의 피가 실피일 때 절대 그 실피인 원거리 미니언을 죽이면 안된다\n죽일경우 라인이 밀려지므로 당기고 싶다면 원거리 미니언을 죽이지 말것."},
+    {"주제":"생존","핵심내용":"무리한 호응 금지","세부설명":"죽을 가능성이 높은 상황에서는 무조건적인 호응을 하지 않는다."},
+    {"주제":"생존","핵심내용":"도주 방향 선택","세부설명":"적에게 쫓길 때는 사람이 없는 곳이 아니라 아군이 많은 방향으로 도망간다."},
+    {"주제":"생존","핵심내용":"단독 행동 금지","세부설명":"원딜 혼자 정글 진입, 바위게 시도 등을 하지 않는다. 적 정글러와 서포터에게 쉽게 물릴 수 있다."},
+    {"주제":"서포터 운영","핵심내용":"와드 퀘스트","세부설명":"빠른 와드퀘스트 수행을 위해 타곤산이 쌓이는 대로 바로바로 터트려줄 것"},
+    {"주제":"서포터 운영","핵심내용":"타곤산 사용법","세부설명":"원딜이 먹기 어려운 미니언 위주로 사용한다. 상대 챔피언 공격 후 사용하면 추가 골드 이득을 얻을 수 있다."},
+    {"주제":"스킬 활용","핵심내용":"히트박스 이해","세부설명":"챔피언 피격 판정은 다리 쪽 기준인 경우가 많다. 몸통보다 발끝을 기준으로 조준한다."},
+    {"주제":"스킬 활용","핵심내용":"진 W 적중률 향상","세부설명":"진 W는 발끝 방향을 노려 사용하면 적중률이 높아진다."},
+    {"주제":"시야","핵심내용":"벽 활용","세부설명":"블루 진영과 레드 진영의 두꺼운 벽을 활용해 시야 우위를 만든다."},
+    {"주제":"시야","핵심내용":"중반 이후 시야 작업","세부설명":"서포터는 15분 이후 미드에 오래 모습을 보이지 말고 부쉬를 활용해 시야를 장악한다."},
+    {"주제":"오브젝트","핵심내용":"용 타이밍 준비","세부설명":"용 타이밍에 라인을 밀고 있다면 용 쪽으로 움직이며 즉시 합류할 준비를 한다."},
+    {"주제":"운영","핵심내용":"킬 이후 귀환 최적화","세부설명":"적을 처치한 후 포탑을 치고 있다면 포탑 근처에서 바로 귀환하는 것도 고려한다."},
+    {"주제":"운영","핵심내용":"후반 운영법","세부설명":"후반에 게임을 굴리기 위해선 1차타워가 아직 살아있는 곳을 우선으로 가서 타워를 깬다"},
+    {"주제":"정글 의식","핵심내용":"정글 시작 위치 확인","세부설명":"게임 시작 시 아군 정글 시작 캠프를 확인하여 상대 정글 동선을 예측한다."},
+    {"주제":"정글 의식","핵심내용":"미니맵 및 캠프 체크","세부설명":"미니맵을 수시로 확인하고 TAB으로 상대 정글 캠프 정보를 확인한다."},
+    {"주제":"정글 의식","핵심내용":"상대 동선 추론","세부설명":"상대 정글의 시작 위치와 이동 경로를 바탕으로 갱, 바위게, 카정 가능성을 예측한다."},
+    {"주제":"정글 의식","핵심내용":"위험 신호 파악","세부설명":"불리해서 뒤로 빠지던 상대가 갑자기 공격적으로 나오면 갱 또는 로밍 가능성을 의심한다."},
+    {"주제":"정글 의식","핵심내용":"우리 정글의 위치 인지","세부설명":"우리가 라인을 밀고 있고 우리 정글이 위쪽에서 교전 중일 때 우리 정글쪽 시야 체크하거나 들어올 거라고 인지하기"},
+    {"주제":"정글 의식","핵심내용":"풀캠 동선","세부설명":"3분 20초가 지날 때쯤부터 상대의 정글갱을 의식해야 함"},
+    {"주제":"정보 은닉","핵심내용":"위치 노출 최소화","세부설명":"상대가 내 위치를 정확히 모를수록 압박감이 커진다. 불필요하게 모습을 보여주지 않는다."},
+    {"주제":"정보 은닉","핵심내용":"시야 밖 압박","세부설명":"상대가 내 위치를 모를 때 언제든 교전이 열릴 수 있다는 부담을 주는 것이 중요하다."},
+    {"주제":"챔피언 활용","핵심내용":"애쉬 추격 콤보","세부설명":"W 후 평타만 고집하지 말고 평타 사거리까지 추격한다. 상대가 점멸을 사용하면 W를 사용하며 계속 추격한다."},
+    {"주제":"포지셔닝","핵심내용":"삼각형 이론 유지","세부설명":"우리 원딜-서폿은 일직선으로 서고, 상대 원딜-서폿도 서로 맞대는 구도를 유지한다. 항상 아군과 호응 가능한 거리를 유지한다."},
+    {"주제":"포지셔닝","핵심내용":"2:1 상황 금지","세부설명":"혼자 상대 두 명에게 맞는 구도를 절대 만들지 않는다. 딜교 전 항상 누가 나를 때릴 수 있는지 확인한다."},
+    {"주제":"포지셔닝","핵심내용":"역할에 맞는 견제","세부설명":"원딜은 원딜, 서폿은 서폿을 상대하는 것이 기본이다. 상대 원딜에게 일방적으로 맞는 위치에서 과한 호응을 하지 않는다."},
+    {"주제":"포지셔닝","핵심내용":"호응 시 우선순위","세부설명":"서폿에게 호응하다가 상대 원딜과 1:1 구도에 노출되면 손해다. 가능하면 아군 원딜과 함께 상대 원딜을 압박하는 형태로 호응한다."},
+    {"주제":"포지셔닝","핵심내용":"사거리 관리","세부설명":"항상 상대 평타 및 주요 스킬 사거리 끝에서 움직인다. 사거리 끝 유지가 딜교, 추격, 후퇴, 갱 호응 모두에 유리하다."},
+    {"주제":"포지셔닝","핵심내용":"아군 조합에 따른 위치 선정","세부설명":"아군이 원거리 위주면 후방 포지션, 근거리 위주면 공격적인 전방 포지션을 잡는다."},
+    {"주제":"포탑","핵심내용":"게임 끝내는 타이밍","세부설명":"억제기 타워를 치고 있을 때 상대의 리젠이 20초 정도 남았을 경우엔 게임을 끝낼 수 있다"},
+    {"주제":"심리전","핵심내용":"평타 심리전","세부설명":"평타 치는 척 심리전하기. 평캔을 해서 스킬을 쓰면 잘 맞을 확률이 올라감\nex) 미니언 먹으려고 평타치는 척~~하다가 스킬 써서 견제하기 → 비원딜일 경우에도 잘 통함"}
+  ],
+  image: [
+    {"핵심내용":"와드 위치","설명":"바텀 삼거리에 핑와","추가설명":"모든 와드는 트라이앵글로\n시야를 이어준다고 생각"},
+    {"핵심내용":"와드 위치","설명":"바텀 삼거리에 핑와를 박기 싫다면\n이 위치에서 제어 돌리기","추가설명":""},
+    {"핵심내용":"와드 위치","설명":"이 위치에 일반와드를 박을 시\n양옆 부쉬에 있는 제어와드에\n안 보이게 박을 수 있음","추가설명":""},
+    {"핵심내용":"와드 위치","설명":"이 위치의 수비와드 좋음","추가설명":""},
+    {"핵심내용":"와드 위치","설명":"이 위치의 와드는 일자부쉬의\n핑와에 안 걸리는 와드","추가설명":""},
+    {"핵심내용":"와드 위치","설명":"삼거리에 핑와를 못 먹겠다면\n이 위치에 와드박기","추가설명":""},
+    {"핵심내용":"바텀 주도권의 용타임 포지셔닝","설명":"이 선 이상을 넘어가면 원딜일 경우\n굉장히 위험해짐","추가설명":""},
+    {"핵심내용":"탱서포터의 타곤산 타이밍","설명":"탱폿은 타곤산이 있을 경우에만\n부쉬에서 나와서 먹고 다시 부쉬\n(부쉬 점거를 해주는 것이 포인트)","추가설명":""},
+    {"핵심내용":"아웃사이드 무빙","설명":"내가 유리한 상황일 때\n아웃사이드 무빙을 하면서 상대를\n쫓아내는 무빙을 한다\n(이때 서폿은 부쉬에서 아웃사이드 무빙으로\n쪼이면서 상대를 몰면 삼각형 구도도 됨)","추가설명":""},
+    {"핵심내용":"삼각형 구도 (주의)","설명":"정말 안 좋은 포지션\n상대 원딜·서폿은 포커싱이 원딜로\n삼각형 구도를 만들었음","추가설명":"'원딜'을 기준으로\n삼각형 구도가 만들어지면 안됨\n그 즉시 빼야함"},
+    {"핵심내용":"케이틀린 용 덫 설계","설명":"케이틀린일 땐 용 덫을\n미리 자리잡고 일자로 설계해주기","추가설명":"상대 불편해서 못 나옴\n핵심은 점부쉬 아래부터 박기"}
+  ],
+  champ: [
+    {
+      name: "바루스",
+      icon: "🏹",
+      combo: ["R", "평", "E", "평", "평", "W", "Q"],
+      tips: ["평타를 칠 수 있는 거리에서 빠르게 콤보로 역병 터트리면서 스킬 쿨 계속 돌리기", "이때 중요한 건 역병 최대스텍을 쌓을 수 있으면 섞기"]
+    },
+    {
+      name: "케이틀린",
+      icon: "🔫",
+      combo: [],
+      tips: ["라인전 오자마자 모든 미니언에 Q긁으면서 라인 푸쉬"]
+    }
+  ],
+  sup: [
+    {"상대법":"모르가나","내용":"일부러 스킬을 던져서 블쉴을 뺀 뒤\n블쉴쿨이 돌기 전에 다시 스킬쓰기"}
+  ]
+};
+
+// ═══════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════
+function topicClass(topic) {
+  return 'topic-' + topic.replace(/\s+/g, '');
+}
+
+// ═══════════════════════════════════════
+// CONCEPT CARDS
+// ═══════════════════════════════════════
+(function buildConcepts() {
+  const topics = [...new Set(DATA.text.map(d => d['주제']))];
+  const filtersEl = document.getElementById('conceptFilters');
+  const cardsEl = document.getElementById('conceptCards');
+  const statsEl = document.getElementById('conceptStats');
+  const searchEl = document.getElementById('conceptSearch');
+  const emptyEl = document.getElementById('conceptEmpty');
+  let activeTopic = 'all';
+
+  // Build filter buttons
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter-btn active';
+  allBtn.textContent = '전체';
+  allBtn.dataset.topic = 'all';
+  filtersEl.appendChild(allBtn);
+
+  topics.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = t;
+    btn.dataset.topic = t;
+    filtersEl.appendChild(btn);
+  });
+
+  // Build cards
+  DATA.text.forEach((item, i) => {
+    const card = document.createElement('div');
+    const tc = topicClass(item['주제']);
+    card.className = `card ${tc}`;
+    card.dataset.topic = item['주제'];
+    card.dataset.idx = i;
+    card.innerHTML = `
+      <div class="card-tag">${item['주제']}</div>
+      <div class="card-title">${item['핵심내용']}</div>
+      <div class="card-desc">${item['세부설명']}</div>
+    `;
+    cardsEl.appendChild(card);
+  });
+
+  function updateStats() {
+    const visible = cardsEl.querySelectorAll('.card:not(.hidden)').length;
+    statsEl.innerHTML = `<span>${visible}</span> / ${DATA.text.length}개 표시 중`;
+    emptyEl.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  function applyFilters() {
+    const query = searchEl.value.trim().toLowerCase();
+    cardsEl.querySelectorAll('.card').forEach(card => {
+      const topic = card.dataset.topic;
+      const text = card.textContent.toLowerCase();
+      const topicOk = activeTopic === 'all' || topic === activeTopic;
+      const searchOk = !query || text.includes(query);
+      card.classList.toggle('hidden', !(topicOk && searchOk));
+    });
+    updateStats();
+  }
+
+  filtersEl.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    filtersEl.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeTopic = btn.dataset.topic;
+    applyFilters();
+  });
+
+  searchEl.addEventListener('input', applyFilters);
+
+  updateStats();
+})();
+
+// ═══════════════════════════════════════
+// IMAGE CARDS
+// ═══════════════════════════════════════
+(function buildImages() {
+  const el = document.getElementById('imageCards');
+  DATA.image.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'image-card';
+    card.innerHTML = `
+      <div class="image-placeholder">🗺️ 이미지 메모</div>
+      <div class="image-card-body">
+        <div class="image-card-label">${item['핵심내용']}</div>
+        <div class="image-card-desc">${item['설명']}</div>
+        ${item['추가설명'] ? `<div class="image-card-extra">💡 ${item['추가설명']}</div>` : ''}
+      </div>
+    `;
+    el.appendChild(card);
+  });
+})();
+
+// ═══════════════════════════════════════
+// CHAMP BLOCKS
+// ═══════════════════════════════════════
+(function buildChamps() {
+  const el = document.getElementById('champBlocks');
+  DATA.champ.forEach(champ => {
+    const block = document.createElement('div');
+    block.className = 'champ-block';
+
+    const comboBadges = champ.combo.length
+      ? champ.combo.map(c => `<span class="combo-badge">${c}</span>`).join('')
+      : '<span style="color:var(--text-muted);font-size:13px">-</span>';
+
+    const tipsHTML = champ.tips.map(t => `<div class="tip-text" style="margin-bottom:8px">• ${t}</div>`).join('');
+
+    block.innerHTML = `
+      <div class="champ-header">
+        <div class="champ-icon">${champ.icon}</div>
+        <div class="champ-name">${champ.name}</div>
+      </div>
+      <div class="champ-body">
+        <div class="champ-label">콤보 순서</div>
+        <div class="combo-badges">${comboBadges}</div>
+        <div class="champ-label">꿀팁</div>
+        <div>${tipsHTML}</div>
+      </div>
+    `;
+    el.appendChild(block);
+  });
+})();
+
+// ═══════════════════════════════════════
+// SUP CARDS
+// ═══════════════════════════════════════
+(function buildSup() {
+  const el = document.getElementById('supCards');
+  DATA.sup.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'sup-card';
+    card.innerHTML = `
+      <div class="sup-champ">${item['상대법']}</div>
+      <div class="sup-content">${item['내용']}</div>
+    `;
+    el.appendChild(card);
+  });
+})();
+
+// ═══════════════════════════════════════
+// TAB NAVIGATION
+// ═══════════════════════════════════════
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
