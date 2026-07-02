@@ -8,39 +8,39 @@
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
 
   :root {
-    /* ─ base ─ */
-    --bg: #eef1f8;
-    --surface: #ffffff;
-    --surface2: #f4f6fb;
-    --surface3: #eaeefa;
-    --border: #e5e9f2;
-    --border-strong: #d3d9e8;
-    --text: #171b26;
-    --text-dim: #5b6472;
-    --text-muted: #99a1b3;
+    /* ─ base (dark navy) ─ */
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2330;
+    --surface3: #242c3d;
+    --border: #2a3142;
+    --border-strong: #3a4356;
+    --text: #e6edf3;
+    --text-dim: #b6bfcc;
+    --text-muted: #8b949e;
 
     /* ─ brand / hero ─ */
-    --hero-start: #4453e8;
-    --hero-end: #6e7bff;
-    --hero-deep: #2c37c4;
-    --primary: #3b5bfe;
-    --primary-dark: #2540d6;
-    --primary-light: #eaf0ff;
+    --hero-start: #26305c;
+    --hero-end: #0d1117;
+    --hero-deep: #05070c;
+    --primary: #4f8cff;
+    --primary-dark: #3569d6;
+    --primary-light: rgba(79,140,255,0.16);
 
-    /* ─ accent palette (muted, reused across topics) ─ */
-    --red: #ef5a63;      --red-bg: #fdedef;
-    --amber: #e7a33d;    --amber-bg: #fcf3e1;
-    --green: #38b07c;    --green-bg: #e7f8ef;
-    --violet: #7c6fef;   --violet-bg: #f1eefe;
-    --teal: #1fa8a1;     --teal-bg: #e2f7f6;
-    --orange: #ef8a45;   --orange-bg: #fdeee2;
-    --blue: #3b5bfe;     --blue-light: #eaf0ff;
+    /* ─ accent palette (translucent, dark-mode friendly) ─ */
+    --red: #f85149;      --red-bg: rgba(248,81,73,0.16);
+    --amber: #e3b341;    --amber-bg: rgba(227,179,65,0.16);
+    --green: #3fb950;    --green-bg: rgba(63,185,80,0.16);
+    --violet: #a371f7;   --violet-bg: rgba(163,113,247,0.16);
+    --teal: #39c5cf;     --teal-bg: rgba(57,197,207,0.16);
+    --orange: #ffa657;   --orange-bg: rgba(255,166,87,0.16);
+    --blue: #4f8cff;     --blue-light: rgba(79,140,255,0.16);
 
-    --shadow-xs: 0 1px 2px rgba(23,27,38,0.05);
-    --shadow-sm: 0 1px 3px rgba(23,27,38,0.05), 0 4px 10px rgba(23,27,38,0.03);
-    --shadow-md: 0 6px 18px rgba(23,27,38,0.08), 0 1px 4px rgba(23,27,38,0.04);
-    --shadow-lg: 0 16px 40px rgba(28,36,90,0.14);
-    --shadow-hero: 0 18px 40px rgba(44,55,196,0.28);
+    --shadow-xs: 0 1px 2px rgba(0,0,0,0.35);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.35), 0 4px 14px rgba(0,0,0,0.25);
+    --shadow-md: 0 8px 22px rgba(0,0,0,0.45);
+    --shadow-lg: 0 20px 48px rgba(0,0,0,0.55);
+    --shadow-hero: 0 20px 48px rgba(0,0,0,0.6);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -69,6 +69,7 @@
     flex-direction: column;
     gap: 16px;
     background: linear-gradient(135deg, var(--hero-start), var(--hero-deep) 120%);
+    border: 1px solid var(--border);
     border-radius: 28px;
     padding: 22px 24px 24px;
     margin-bottom: 14px;
@@ -81,7 +82,7 @@
     position: absolute;
     top: -60px; right: -60px;
     width: 220px; height: 220px;
-    background: radial-gradient(circle, rgba(255,255,255,0.16), transparent 70%);
+    background: radial-gradient(circle, rgba(79,140,255,0.18), transparent 70%);
     border-radius: 50%;
     pointer-events: none;
   }
@@ -89,24 +90,24 @@
   .emblem {
     width: 46px; height: 46px;
     border-radius: 15px;
-    background: rgba(255,255,255,0.16);
+    background: rgba(255,255,255,0.1);
     display: flex; align-items: center; justify-content: center;
     font-size: 21px; flex-shrink: 0;
   }
   .header-text h1 { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: -0.01em; }
-  .header-text p { font-size: 11px; color: rgba(255,255,255,0.72); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px; }
+  .header-text p { font-size: 11px; color: rgba(230,237,243,0.62); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px; }
 
   .hero-stats { display: flex; gap: 8px; position: relative; z-index: 1; }
   .hero-stat {
     flex: 1;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 14px;
     padding: 9px 12px;
     color: #fff;
   }
   .hero-stat b { display: block; font-size: 17px; font-weight: 900; line-height: 1.2; }
-  .hero-stat span { font-size: 10px; color: rgba(255,255,255,0.7); letter-spacing: 0.03em; }
+  .hero-stat span { font-size: 10px; color: rgba(230,237,243,0.6); letter-spacing: 0.03em; }
 
   /* ─── TABS (segmented pill) ─── */
   .tabs {
@@ -134,7 +135,7 @@
     user-select: none;
   }
   .tab:hover { color: var(--text-dim); background: var(--surface2); }
-  .tab.active { color: #fff; background: var(--primary); box-shadow: 0 6px 14px rgba(59,91,254,0.32); }
+  .tab.active { color: #fff; background: var(--primary); box-shadow: 0 6px 14px rgba(79,140,255,0.35); }
 
   /* ─── ADMIN BUTTON ─── */
   .admin-toggle {
@@ -146,21 +147,19 @@
     font-size: 18px; transition: all 0.18s;
   }
   .admin-toggle:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-2px); }
-  .admin-toggle:hover span { filter: brightness(10); }
   .admin-toggle.active { background: var(--primary); border-color: var(--primary); }
-  .admin-toggle.active span { filter: brightness(10); }
 
   /* ─── MODAL ─── */
   .modal-backdrop {
     display: none; position: fixed; inset: 0;
-    background: rgba(23,27,38,0.42); z-index: 300;
+    background: rgba(0,0,0,0.6); z-index: 300;
     align-items: center; justify-content: center;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(3px);
   }
   .modal-backdrop.open { display: flex; }
   .modal {
     background: var(--surface); border-radius: 26px;
-    padding: 26px; width: 90%; max-width: 500px;
+    padding: 26px; width: 90%; max-width: 520px;
     box-shadow: var(--shadow-lg);
     max-height: 85vh; overflow-y: auto;
     border: 1px solid var(--border);
@@ -187,10 +186,11 @@
     transition: border-color 0.18s, background 0.18s;
   }
   .form-input:focus, .form-select:focus, .form-textarea:focus {
-    border-color: var(--primary); background: var(--surface);
+    border-color: var(--primary); background: var(--surface3);
   }
   .form-textarea { resize: vertical; min-height: 80px; border-radius: 16px; }
   .form-select { cursor: pointer; }
+  .form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); }
 
   .btn {
     padding: 10px 20px; border-radius: 999px; border: none;
@@ -205,31 +205,40 @@
   .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
   .btn-row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px; flex-wrap: wrap; }
 
+  /* ─── DYNAMIC LIST FIELDS (콤보/꿀팁/대응법 여러개 입력) ─── */
+  .dynamic-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+  .dyn-row { display: flex; gap: 8px; align-items: center; }
+  .dyn-input { flex: 1; }
+  .dyn-remove {
+    flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
+    border: 1px solid var(--border); background: var(--surface2);
+    color: var(--text-muted); cursor: pointer; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .dyn-remove:hover { background: var(--red-bg); color: var(--red); border-color: var(--red-bg); }
+  .dyn-empty { font-size: 12px; color: var(--text-muted); padding: 6px 2px 10px; }
+  .btn-add-field {
+    padding: 9px 16px; border-radius: 999px; border: 1.5px dashed var(--border-strong);
+    background: transparent; color: var(--text-dim); font-size: 12px; font-weight: 700;
+    cursor: pointer; width: 100%; font-family: inherit; transition: all 0.15s;
+  }
+  .btn-add-field:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+
   /* ─── PASSWORD SCREEN ─── */
   .pw-screen { text-align: center; padding: 10px 0 4px; }
   .pw-screen p { font-size: 13px; color: var(--text-dim); margin-bottom: 14px; }
-  .pw-input-row { display: flex; gap: 8px; }
   .pw-error { color: var(--red); font-size: 12px; margin-top: 8px; display: none; font-weight: 600; }
-
-  /* ─── ADMIN PANEL ─── */
-  .admin-panel { display: none; }
-  .admin-panel.open { display: block; }
-  .admin-section-title {
-    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--text-muted);
-    margin-bottom: 10px; margin-top: 18px;
-  }
-  .admin-action-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
 
   /* ─── SAVING INDICATOR ─── */
   .save-indicator {
     display: none; position: fixed; top: 20px; right: 24px; z-index: 400;
-    background: var(--text); color: #fff; font-size: 12px; font-weight: 700;
+    background: var(--surface3); color: var(--text); font-size: 12px; font-weight: 700;
     padding: 10px 18px; border-radius: 999px; box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
   }
   .save-indicator.show { display: block; }
-  .save-indicator.success { background: var(--green); }
-  .save-indicator.error { background: var(--red); }
+  .save-indicator.success { background: var(--green); color: #06240f; border-color: var(--green); }
+  .save-indicator.error { background: var(--red); color: #2a0705; border-color: var(--red); }
 
   /* ─── MAIN CONTENT ─── */
   main { max-width: 1100px; margin: 0 auto; padding: 22px 20px 60px; }
@@ -282,7 +291,6 @@
   .card-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 7px; line-height: 1.35; }
   .card-desc { font-size: 13px; color: var(--text-dim); line-height: 1.7; white-space: pre-line; }
 
-  /* 관리자 모드 카드 버튼 */
   .card-admin-btns {
     display: none; gap: 6px; margin-top: 14px; padding-top: 12px;
     border-top: 1px solid var(--border);
@@ -312,57 +320,56 @@
   .topic-포탑      { --topic-color: var(--orange); --topic-bg: var(--orange-bg); }
   .topic-심리전    { --topic-color: var(--violet); --topic-bg: var(--violet-bg); }
 
-  /* ─── CHAMP CARDS ─── */
-  .champ-card {
+  /* ─── PROFILE CARDS (챔피언별 팁 + 챔피언 상대법 공용) ─── */
+  .profile-card {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: 22px; margin-bottom: 16px; overflow: hidden;
     box-shadow: var(--shadow-sm); transition: box-shadow 0.2s, transform 0.18s;
   }
-  .champ-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-  .champ-card.hidden { display: none; }
-  .champ-header {
+  .profile-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .profile-card.hidden { display: none; }
+  .profile-header {
     background: var(--surface2); padding: 16px 20px;
     display: flex; align-items: center; gap: 14px;
     border-bottom: 1px solid var(--border);
   }
-  .champ-img-wrap {
+  .profile-img-wrap {
     width: 52px; height: 52px; border-radius: 50%;
     background: var(--primary-light); box-shadow: 0 0 0 3px var(--surface2), 0 0 0 4px var(--border);
     display: flex; align-items: center; justify-content: center;
     font-size: 22px; flex-shrink: 0; overflow: hidden;
   }
-  .champ-img-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-  .champ-name { font-size: 16px; font-weight: 800; color: var(--text); }
-  .champ-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-  .champ-body { padding: 18px 20px; }
-  .champ-section { margin-bottom: 16px; }
-  .champ-section:last-child { margin-bottom: 0; }
-  .champ-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 9px; }
+  .profile-img-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  .profile-name { font-size: 16px; font-weight: 800; color: var(--text); }
+  .profile-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .profile-body { padding: 18px 20px; }
+  .profile-section { margin-bottom: 16px; }
+  .profile-section:last-child { margin-bottom: 0; }
+  .profile-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 9px; }
+
+  .combo-set { margin-bottom: 10px; }
+  .combo-set:last-child { margin-bottom: 0; }
+  .combo-set-label { font-size: 10px; color: var(--text-muted); margin-bottom: 6px; font-weight: 700; }
   .combo-badges { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-  .combo-badge { background: var(--primary-light); border-radius: 10px; padding: 5px 12px; font-size: 13px; font-weight: 800; color: var(--primary-dark); }
+  .combo-badge { background: var(--primary-light); border-radius: 10px; padding: 5px 12px; font-size: 13px; font-weight: 800; color: var(--primary); }
   .combo-arrow { color: var(--text-muted); font-size: 12px; }
-  .tip-item { display: flex; gap: 10px; align-items: flex-start; padding: 10px 13px; background: var(--surface2); border-radius: 13px; margin-bottom: 6px; font-size: 13px; color: var(--text-dim); line-height: 1.65; }
+
+  .tip-item { display: flex; gap: 10px; align-items: flex-start; padding: 10px 13px; background: var(--surface2); border-radius: 13px; margin-bottom: 6px; font-size: 13px; color: var(--text-dim); line-height: 1.65; white-space: pre-line; }
+  .tip-item:last-child { margin-bottom: 0; }
   .tip-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); flex-shrink: 0; margin-top: 6px; }
 
-  .champ-admin-btns {
+  .profile-admin-btns {
     display: none; gap: 6px; margin-top: 12px; padding: 14px 20px;
     border-top: 1px solid var(--border);
   }
-  body.admin-mode .champ-admin-btns { display: flex; }
+  body.admin-mode .profile-admin-btns { display: flex; }
 
-  /* ─── 상대법(SUP) CARDS ─── */
+  /* ─── SECTION LABEL ─── */
   .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1.5px solid var(--border); }
-  .sup-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 18px 20px; margin-bottom: 12px; box-shadow: var(--shadow-sm); }
-  .sup-champ-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-  .sup-badge { font-size: 10.5px; font-weight: 800; background: var(--red-bg); color: var(--red); border-radius: 999px; padding: 3px 10px; }
-  .sup-champ-name { font-size: 15px; font-weight: 800; color: var(--text); }
-  .sup-content { font-size: 13px; color: var(--text-dim); line-height: 1.7; white-space: pre-line; }
-  .sup-admin-btns { display: none; gap: 6px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); }
-  body.admin-mode .sup-admin-btns { display: flex; }
 
   /* ─── ADMIN MODE BANNER ─── */
   .admin-banner {
-    display: none; background: var(--primary-light); color: var(--primary-dark);
+    display: none; background: var(--primary-light); color: var(--primary);
     text-align: center; font-size: 12px; font-weight: 700;
     padding: 9px; letter-spacing: 0.02em;
   }
@@ -386,10 +393,9 @@
   <div class="header-inner">
     <div class="header-top">
       <div class="hero-row">
-    
         <div class="header-text">
           <h1>리그오브레전드 공책</h1>
-          <p>League of Legends · ADC &amp; Support · Bottom Lane</p>
+          <p>롤의 고수가 될 거야 롤의 고수가 될 거라고!!</p>
         </div>
       </div>
       <div class="hero-stats" id="heroStats"></div>
@@ -438,7 +444,18 @@
   <!-- TAB 3 -->
   <div class="tab-content" id="tab-sup">
     <div class="section-label">챔피언 상대법</div>
+    <div class="controls">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input class="search-input" id="supSearch" type="text" placeholder="챔피언 검색...">
+      </div>
+      <div class="filters" id="supFilters"></div>
+    </div>
+    <div class="stats-bar" id="supStats"></div>
     <div id="supCards"></div>
+    <div class="empty-state" id="supEmpty" style="display:none">
+      <div class="icon">🔎</div>검색 결과가 없습니다
+    </div>
   </div>
 </main>
 
@@ -521,12 +538,14 @@
       <input class="form-input" id="f-champ-image" placeholder="예: images/varus.png">
     </div>
     <div class="form-group">
-      <label class="form-label">콤보 순서 (쉼표로 구분)</label>
-      <input class="form-input" id="f-champ-combo" placeholder="예: R, 평, E, 평, W, Q">
+      <label class="form-label">콤보 목록</label>
+      <div class="dynamic-list" id="comboList"></div>
+      <button type="button" class="btn-add-field" id="addComboRowBtn">+ 콤보 추가</button>
     </div>
     <div class="form-group">
-      <label class="form-label">꿀팁 (줄바꿈으로 구분)</label>
-      <textarea class="form-textarea" id="f-champ-tips" placeholder="팁 1&#10;팁 2&#10;팁 3"></textarea>
+      <label class="form-label">꿀팁 목록</label>
+      <div class="dynamic-list" id="tipsList"></div>
+      <button type="button" class="btn-add-field" id="addTipRowBtn">+ 팁 추가</button>
     </div>
     <div class="btn-row">
       <button class="btn btn-secondary" id="champModalCancel">취소</button>
@@ -547,8 +566,17 @@
       <input class="form-input" id="f-sup-name" placeholder="예: 모르가나">
     </div>
     <div class="form-group">
-      <label class="form-label">대응법</label>
-      <textarea class="form-textarea" id="f-sup-content" placeholder="대응 방법 설명..."></textarea>
+      <label class="form-label">아이콘 이모지</label>
+      <input class="form-input" id="f-sup-icon" placeholder="예: 🛡️">
+    </div>
+    <div class="form-group">
+      <label class="form-label">이미지 경로 (선택)</label>
+      <input class="form-input" id="f-sup-image" placeholder="예: images/morgana.png">
+    </div>
+    <div class="form-group">
+      <label class="form-label">대응법 목록</label>
+      <div class="dynamic-list" id="supTipsList"></div>
+      <button type="button" class="btn-add-field" id="addSupTipRowBtn">+ 대응법 추가</button>
     </div>
     <div class="btn-row">
       <button class="btn btn-secondary" id="supModalCancel">취소</button>
@@ -815,7 +843,7 @@ let DATA = {
       "핵심내용": "아군 조합에 따른 위치 선정",
       "세부설명": "아군이 원거리 위주면 후방 포지션, 근거리 위주면 공격적인 전방 포지션을 잡는다."
     },
-     {
+    {
       "주제": "포지셔닝",
       "핵심내용": "유리할 때의 부쉬플레이는 오히려 안 좋다",
       "세부설명": "서폿일 경우 강가나 정글의 싸움이 났을 때 빠른 합류를 위해서는 강가쪽 포지셔닝을 잡아야한다 빠른 합류 기다값을 위해서!"
@@ -836,14 +864,8 @@ let DATA = {
       "name": "바루스",
       "icon": "🏹",
       "image": "images/varus.png",
-      "combo": [
-        "R",
-        "평",
-        "E",
-        "평",
-        "평",
-        "W",
-        "Q"
+      "combos": [
+        ["R", "평", "E", "평", "평", "W", "Q"]
       ],
       "tips": [
         "평타를 칠 수 있는 거리에서 빠르게 콤보로 역병 터트리면서 스킬 쿨 계속 돌리기",
@@ -854,7 +876,7 @@ let DATA = {
       "name": "케이틀린",
       "icon": "🔫",
       "image": "images/caitlyn.png",
-      "combo": [],
+      "combos": [],
       "tips": [
         "라인전 오자마자 모든 미니언에 Q긁으면서 라인 푸쉬"
       ]
@@ -863,19 +885,20 @@ let DATA = {
       "name": "자야",
       "icon": "🏹",
       "image": "images/xayah.png",
-      "combo": [
-        "W",
-        "평",
-        "Q",
-        "E"
+      "combos": [
+        ["W", "평", "Q", "E"]
       ],
       "tips": []
     }
   ],
   "sup": [
     {
-      "상대법": "모르가나",
-      "내용": "일부러 스킬을 던져서 블쉴을 뺀 뒤\n블쉴쿨이 돌기 전에 다시 스킬쓰기"
+      "name": "모르가나",
+      "icon": "🛡️",
+      "image": null,
+      "tips": [
+        "일부러 스킬을 던져서 블쉴을 뺀 뒤\n블쉴쿨이 돌기 전에 다시 스킬쓰기"
+      ]
     }
   ]
 };
@@ -883,6 +906,9 @@ let DATA = {
 // ─── 상태 ───
 let adminMode = false;
 let editTarget = { type: null, index: null };
+let champCombosDraft = [];
+let champTipsDraft = [];
+let supTipsDraft = [];
 
 // ─── 히어로 통계 ───
 function renderHeroStats() {
@@ -911,7 +937,6 @@ async function saveToGitHub() {
   }
   showSave('⏳ 저장 중...');
   try {
-    // 현재 파일의 SHA 가져오기
     const infoRes = await fetch(
       `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.file}`,
       { headers: { Authorization: `token ${sessionToken}` } }
@@ -925,15 +950,12 @@ async function saveToGitHub() {
     const info = await infoRes.json();
     const sha = info.sha;
 
-    // 현재 HTML에서 DATA 부분만 교체
     const currentHTML = await fetch(location.href + '?nocache=' + Date.now()).then(r => r.text());
     const newDataStr = 'let DATA = ' + JSON.stringify(DATA, null, 2) + ';';
     const updated = currentHTML.replace(/let DATA = \{[\s\S]*?\};\n\n/, newDataStr + '\n\n');
 
-    // base64 인코딩
     const encoded = btoa(unescape(encodeURIComponent(updated)));
 
-    // 파일 업데이트
     const putRes = await fetch(
       `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.file}`,
       {
@@ -961,7 +983,7 @@ async function saveToGitHub() {
   }
 }
 
-// ─── 렌더링 함수들 ───
+// ─── 개념 카드 렌더링 ───
 function renderConcepts() {
   const cardsEl = document.getElementById('conceptCards');
   const filtersEl = document.getElementById('conceptFilters');
@@ -1003,6 +1025,48 @@ function renderConcepts() {
   initConceptFilter();
 }
 
+// ─── 프로필 카드 공용 빌더 (챔피언별 팁 / 챔피언 상대법) ───
+function buildProfileCardHTML(item, i, showCombos) {
+  const imgHTML = item.image
+    ? `<img src="${item.image}" alt="${item.name}">`
+    : `<span>${item.icon || (showCombos ? '🏹' : '🛡️')}</span>`;
+
+  const combos = item.combos || [];
+  const combosHTML = (showCombos && combos.length)
+    ? combos.map((combo, ci) => `
+        <div class="combo-set">
+          ${combos.length > 1 ? `<div class="combo-set-label">콤보 ${ci+1}</div>` : ''}
+          <div class="combo-badges">${combo.map((c, ii) =>
+            `<span class="combo-badge">${c}</span>${ii < combo.length-1 ? '<span class="combo-arrow">→</span>' : ''}`
+          ).join('')}</div>
+        </div>`).join('')
+    : '';
+
+  const tips = item.tips || [];
+  const tipsHTML = tips.length
+    ? tips.map(t => `<div class="tip-item"><div class="tip-dot"></div><div>${t}</div></div>`).join('')
+    : `<div class="dyn-empty">아직 등록된 내용이 없습니다</div>`;
+
+  const subLabel = showCombos ? `챔피언 팁 · ${tips.length}개` : `대응법 · ${tips.length}개`;
+
+  return `
+    <div class="profile-header">
+      <div class="profile-img-wrap">${imgHTML}</div>
+      <div>
+        <div class="profile-name">${item.name}</div>
+        <div class="profile-sub">${subLabel}</div>
+      </div>
+    </div>
+    <div class="profile-body">
+      ${combosHTML ? `<div class="profile-section"><div class="profile-label">콤보 순서</div>${combosHTML}</div>` : ''}
+      <div class="profile-section"><div class="profile-label">${showCombos ? '꿀팁' : '대응법'}</div>${tipsHTML}</div>
+    </div>
+    <div class="profile-admin-btns">
+      <button class="card-edit-btn" data-idx="${i}">✏️ 수정</button>
+      <button class="card-del-btn" data-idx="${i}">🗑 삭제</button>
+    </div>`;
+}
+
 function renderChamps() {
   const el = document.getElementById('champCards');
   const filtersEl = document.getElementById('champFilters');
@@ -1023,39 +1087,9 @@ function renderChamps() {
     filtersEl.appendChild(btn);
 
     const card = document.createElement('div');
-    card.className = 'champ-card';
+    card.className = 'profile-card';
     card.dataset.champ = champ.name;
-
-    const imgHTML = champ.image
-      ? `<img src="${champ.image}" alt="${champ.name}">`
-      : `<span>${champ.icon}</span>`;
-
-    const comboHTML = champ.combo && champ.combo.length
-      ? champ.combo.map((c, ci) =>
-          `<span class="combo-badge">${c}</span>${ci < champ.combo.length-1 ? '<span class="combo-arrow">→</span>' : ''}`
-        ).join('')
-      : '<span style="color:var(--text-muted)">-</span>';
-
-    const tipsHTML = (champ.tips||[]).map(t =>
-      `<div class="tip-item"><div class="tip-dot"></div><div>${t}</div></div>`
-    ).join('');
-
-    card.innerHTML = `
-      <div class="champ-header">
-        <div class="champ-img-wrap">${imgHTML}</div>
-        <div>
-          <div class="champ-name">${champ.name}</div>
-          <div class="champ-sub">챔피언 팁 · ${(champ.tips||[]).length}개</div>
-        </div>
-      </div>
-      <div class="champ-body">
-        ${champ.combo && champ.combo.length ? `<div class="champ-section"><div class="champ-label">콤보 순서</div><div class="combo-badges">${comboHTML}</div></div>` : ''}
-        <div class="champ-section"><div class="champ-label">꿀팁</div>${tipsHTML}</div>
-      </div>
-      <div class="champ-admin-btns">
-        <button class="card-edit-btn" data-idx="${i}">✏️ 수정</button>
-        <button class="card-del-btn" data-idx="${i}">🗑 삭제</button>
-      </div>`;
+    card.innerHTML = buildProfileCardHTML(champ, i, true);
     el.appendChild(card);
   });
 
@@ -1065,27 +1099,38 @@ function renderChamps() {
 
 function renderSup() {
   const el = document.getElementById('supCards');
+  const filtersEl = document.getElementById('supFilters');
   el.innerHTML = '';
+  filtersEl.innerHTML = '';
+
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter-btn active';
+  allBtn.textContent = '전체';
+  allBtn.dataset.champ = 'all';
+  filtersEl.appendChild(allBtn);
+
   DATA.sup.forEach((item, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = item.name;
+    btn.dataset.champ = item.name;
+    filtersEl.appendChild(btn);
+
     const card = document.createElement('div');
-    card.className = 'sup-card';
-    card.innerHTML = `
-      <div class="sup-champ-row">
-        <span class="sup-badge">상대</span>
-        <span class="sup-champ-name">${item['상대법']}</span>
-      </div>
-      <div class="sup-content">${item['내용']}</div>
-      <div class="sup-admin-btns">
-        <button class="card-edit-btn" data-idx="${i}">✏️ 수정</button>
-        <button class="card-del-btn" data-idx="${i}">🗑 삭제</button>
-      </div>`;
+    card.className = 'profile-card';
+    card.dataset.champ = item.name;
+    card.innerHTML = buildProfileCardHTML(item, i, false);
     el.appendChild(card);
   });
+
+  updateSupStats();
+  initSupFilter();
 }
 
 // ─── 필터/검색 ───
 let conceptActiveTopic = 'all';
 let champActiveFilter = 'all';
+let supActiveFilter = 'all';
 
 function updateConceptStats() {
   const visible = document.querySelectorAll('#conceptCards .card:not(.hidden)').length;
@@ -1116,14 +1161,14 @@ function initConceptFilter() {
 }
 
 function updateChampStats() {
-  const visible = document.querySelectorAll('#champCards .champ-card:not(.hidden)').length;
+  const visible = document.querySelectorAll('#champCards .profile-card:not(.hidden)').length;
   document.getElementById('champStats').innerHTML = `<span>${visible}</span> / ${DATA.champ.length}명 표시 중`;
   document.getElementById('champEmpty').style.display = visible === 0 ? 'block' : 'none';
 }
 
 function applyChampFilter() {
   const q = document.getElementById('champSearch').value.trim().toLowerCase();
-  document.querySelectorAll('#champCards .champ-card').forEach(card => {
+  document.querySelectorAll('#champCards .profile-card').forEach(card => {
     const champOk = champActiveFilter === 'all' || card.dataset.champ === champActiveFilter;
     const searchOk = !q || card.textContent.toLowerCase().includes(q);
     card.classList.toggle('hidden', !(champOk && searchOk));
@@ -1143,9 +1188,109 @@ function initChampFilter() {
   document.getElementById('champSearch').addEventListener('input', applyChampFilter);
 }
 
+function updateSupStats() {
+  const visible = document.querySelectorAll('#supCards .profile-card:not(.hidden)').length;
+  document.getElementById('supStats').innerHTML = `<span>${visible}</span> / ${DATA.sup.length}명 표시 중`;
+  document.getElementById('supEmpty').style.display = visible === 0 ? 'block' : 'none';
+}
+
+function applySupFilter() {
+  const q = document.getElementById('supSearch').value.trim().toLowerCase();
+  document.querySelectorAll('#supCards .profile-card').forEach(card => {
+    const champOk = supActiveFilter === 'all' || card.dataset.champ === supActiveFilter;
+    const searchOk = !q || card.textContent.toLowerCase().includes(q);
+    card.classList.toggle('hidden', !(champOk && searchOk));
+  });
+  updateSupStats();
+}
+
+function initSupFilter() {
+  document.getElementById('supFilters').addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('#supFilters .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    supActiveFilter = btn.dataset.champ;
+    applySupFilter();
+  });
+  document.getElementById('supSearch').addEventListener('input', applySupFilter);
+}
+
 // ─── 모달 열기/닫기 ───
 function openModal(id) { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+// ─── 동적 목록 입력 (콤보 / 꿀팁 / 대응법) ───
+function renderTextListRows(containerId, arr) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = '';
+  if (!arr.length) {
+    const empty = document.createElement('div');
+    empty.className = 'dyn-empty';
+    empty.textContent = '아직 항목이 없습니다. 아래 버튼으로 추가해 주세요.';
+    el.appendChild(empty);
+  }
+  arr.forEach((val, idx) => {
+    const row = document.createElement('div');
+    row.className = 'dyn-row';
+    const input = document.createElement('input');
+    input.className = 'form-input dyn-input';
+    input.placeholder = '내용을 입력하세요';
+    input.value = val;
+    input.addEventListener('input', () => { arr[idx] = input.value; });
+    const rm = document.createElement('button');
+    rm.type = 'button';
+    rm.className = 'dyn-remove';
+    rm.textContent = '✕';
+    rm.addEventListener('click', () => { arr.splice(idx, 1); renderTextListRows(containerId, arr); });
+    row.appendChild(input);
+    row.appendChild(rm);
+    el.appendChild(row);
+  });
+}
+
+function renderComboListRows() {
+  const el = document.getElementById('comboList');
+  el.innerHTML = '';
+  if (!champCombosDraft.length) {
+    const empty = document.createElement('div');
+    empty.className = 'dyn-empty';
+    empty.textContent = '아직 콤보가 없습니다. 아래 버튼으로 추가해 주세요.';
+    el.appendChild(empty);
+  }
+  champCombosDraft.forEach((combo, idx) => {
+    const row = document.createElement('div');
+    row.className = 'dyn-row';
+    const input = document.createElement('input');
+    input.className = 'form-input dyn-input';
+    input.placeholder = '예: R, 평, E, 평, W, Q';
+    input.value = combo.join(', ');
+    input.addEventListener('input', () => {
+      champCombosDraft[idx] = input.value.split(',').map(s => s.trim()).filter(Boolean);
+    });
+    const rm = document.createElement('button');
+    rm.type = 'button';
+    rm.className = 'dyn-remove';
+    rm.textContent = '✕';
+    rm.addEventListener('click', () => { champCombosDraft.splice(idx, 1); renderComboListRows(); });
+    row.appendChild(input);
+    row.appendChild(rm);
+    el.appendChild(row);
+  });
+}
+
+document.getElementById('addComboRowBtn').addEventListener('click', () => {
+  champCombosDraft.push([]);
+  renderComboListRows();
+});
+document.getElementById('addTipRowBtn').addEventListener('click', () => {
+  champTipsDraft.push('');
+  renderTextListRows('tipsList', champTipsDraft);
+});
+document.getElementById('addSupTipRowBtn').addEventListener('click', () => {
+  supTipsDraft.push('');
+  renderTextListRows('supTipsList', supTipsDraft);
+});
 
 // ─── 비밀번호 + 토큰 로그인 ───
 document.getElementById('adminToggle').addEventListener('click', () => {
@@ -1209,7 +1354,6 @@ document.getElementById('conceptCards').addEventListener('click', e => {
   }
 });
 
-// 개념 추가 버튼 (관리자 모드일 때만)
 document.getElementById('tab-concepts').addEventListener('click', e => {
   if (e.target.id === 'addConceptBtn') {
     editTarget = { type: 'concept', index: null };
@@ -1250,10 +1394,12 @@ document.getElementById('champCards').addEventListener('click', e => {
     editTarget = { type: 'champ', index: i };
     const c = DATA.champ[i];
     document.getElementById('f-champ-name').value = c.name;
-    document.getElementById('f-champ-icon').value = c.icon;
+    document.getElementById('f-champ-icon').value = c.icon || '';
     document.getElementById('f-champ-image').value = c.image || '';
-    document.getElementById('f-champ-combo').value = (c.combo||[]).join(', ');
-    document.getElementById('f-champ-tips').value = (c.tips||[]).join('\n');
+    champCombosDraft = (c.combos || []).map(combo => [...combo]);
+    champTipsDraft = [...(c.tips || [])];
+    renderComboListRows();
+    renderTextListRows('tipsList', champTipsDraft);
     document.getElementById('champModalTitle').textContent = '🏹 챔피언 수정';
     openModal('champModal');
   }
@@ -1275,8 +1421,8 @@ document.getElementById('champModalSave').addEventListener('click', () => {
     name,
     icon: document.getElementById('f-champ-icon').value.trim() || '🏹',
     image: document.getElementById('f-champ-image').value.trim() || null,
-    combo: document.getElementById('f-champ-combo').value.split(',').map(s=>s.trim()).filter(Boolean),
-    tips: document.getElementById('f-champ-tips').value.split('\n').map(s=>s.trim()).filter(Boolean)
+    combos: champCombosDraft.map(c => c.filter(Boolean)).filter(c => c.length > 0),
+    tips: champTipsDraft.map(t => t.trim()).filter(Boolean)
   };
   if (editTarget.index !== null) {
     DATA.champ[editTarget.index] = item;
@@ -1299,14 +1445,18 @@ document.getElementById('supCards').addEventListener('click', e => {
   if (editBtn) {
     const i = parseInt(editBtn.dataset.idx);
     editTarget = { type: 'sup', index: i };
-    document.getElementById('f-sup-name').value = DATA.sup[i]['상대법'];
-    document.getElementById('f-sup-content').value = DATA.sup[i]['내용'];
+    const s = DATA.sup[i];
+    document.getElementById('f-sup-name').value = s.name;
+    document.getElementById('f-sup-icon').value = s.icon || '';
+    document.getElementById('f-sup-image').value = s.image || '';
+    supTipsDraft = [...(s.tips || [])];
+    renderTextListRows('supTipsList', supTipsDraft);
     document.getElementById('supModalTitle').textContent = '🛡️ 챔피언 상대법 수정';
     openModal('supModal');
   }
   if (delBtn) {
     const i = parseInt(delBtn.dataset.idx);
-    if (confirm(`"${DATA.sup[i]['상대법']}" 를 삭제할까요?`)) {
+    if (confirm(`"${DATA.sup[i].name}" 를 삭제할까요?`)) {
       DATA.sup.splice(i, 1);
       renderSup();
       renderHeroStats();
@@ -1317,9 +1467,13 @@ document.getElementById('supCards').addEventListener('click', e => {
 
 document.getElementById('supModalSave').addEventListener('click', () => {
   const name = document.getElementById('f-sup-name').value.trim();
-  const content = document.getElementById('f-sup-content').value.trim();
   if (!name) return alert('챔피언 이름을 입력해 주세요');
-  const item = { '상대법': name, '내용': content };
+  const item = {
+    name,
+    icon: document.getElementById('f-sup-icon').value.trim() || '🛡️',
+    image: document.getElementById('f-sup-image').value.trim() || null,
+    tips: supTipsDraft.map(t => t.trim()).filter(Boolean)
+  };
   if (editTarget.index !== null) {
     DATA.sup[editTarget.index] = item;
   } else {
@@ -1345,7 +1499,6 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 // ─── 관리자 모드 추가 버튼 주입 ───
 function injectAdminAddButtons() {
-  // 개념 탭 추가 버튼
   const conceptTab = document.getElementById('tab-concepts');
   const addConceptBtn = document.createElement('button');
   addConceptBtn.id = 'addConceptBtn';
@@ -1354,7 +1507,6 @@ function injectAdminAddButtons() {
   addConceptBtn.textContent = '+ 개념 추가';
   conceptTab.insertBefore(addConceptBtn, conceptTab.firstChild);
 
-  // 챔피언 탭 추가 버튼
   const champTab = document.getElementById('tab-champs');
   const addChampBtn = document.createElement('button');
   addChampBtn.id = 'addChampBtn';
@@ -1364,28 +1516,31 @@ function injectAdminAddButtons() {
   champTab.insertBefore(addChampBtn, champTab.firstChild);
   addChampBtn.addEventListener('click', () => {
     editTarget = { type: 'champ', index: null };
-    ['f-champ-name','f-champ-icon','f-champ-image','f-champ-combo','f-champ-tips'].forEach(id => document.getElementById(id).value = '');
+    ['f-champ-name','f-champ-icon','f-champ-image'].forEach(id => document.getElementById(id).value = '');
+    champCombosDraft = [];
+    champTipsDraft = [];
+    renderComboListRows();
+    renderTextListRows('tipsList', champTipsDraft);
     document.getElementById('champModalTitle').textContent = '🏹 챔피언 추가';
     openModal('champModal');
   });
 
-  // 상대법 탭 추가 버튼
   const supTab = document.getElementById('tab-sup');
   const addSupBtn = document.createElement('button');
   addSupBtn.id = 'addSupBtn';
   addSupBtn.className = 'btn btn-primary';
   addSupBtn.style.cssText = 'display:none;margin-bottom:16px;';
   addSupBtn.textContent = '+ 상대법 추가';
-  supTab.insertBefore(addSupBtn, supTab.querySelector('.section-label').nextSibling);
+  supTab.insertBefore(addSupBtn, supTab.firstChild);
   addSupBtn.addEventListener('click', () => {
     editTarget = { type: 'sup', index: null };
-    document.getElementById('f-sup-name').value = '';
-    document.getElementById('f-sup-content').value = '';
+    ['f-sup-name','f-sup-icon','f-sup-image'].forEach(id => document.getElementById(id).value = '');
+    supTipsDraft = [];
+    renderTextListRows('supTipsList', supTipsDraft);
     document.getElementById('supModalTitle').textContent = '🛡️ 챔피언 상대법 추가';
     openModal('supModal');
   });
 
-  // 관리자 모드 ON/OFF 시 추가 버튼 표시
   const observer = new MutationObserver(() => {
     const isAdmin = document.body.classList.contains('admin-mode');
     [addConceptBtn, addChampBtn, addSupBtn].forEach(btn => {
