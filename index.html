@@ -357,6 +357,7 @@
   .tip-item { display: flex; gap: 10px; align-items: flex-start; padding: 10px 13px; background: var(--surface2); border-radius: 13px; margin-bottom: 6px; font-size: 13px; color: var(--text-dim); line-height: 1.65; white-space: pre-line; }
   .tip-item:last-child { margin-bottom: 0; }
   .tip-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); flex-shrink: 0; margin-top: 6px; }
+  .tip-dot-counter { background: var(--red); }
 
   .profile-admin-btns {
     display: none; gap: 6px; margin-top: 12px; padding: 14px 20px;
@@ -402,8 +403,8 @@
     </div>
     <nav class="tabs">
       <div class="tab active" data-tab="concepts">📋 개념 정리</div>
-      <div class="tab" data-tab="champs">🏹 챔피언별 팁</div>
-      <div class="tab" data-tab="sup">🛡️ 챔피언 상대법</div>
+      <div class="tab" data-tab="champs">🏹 원딜</div>
+      <div class="tab" data-tab="sup">🛡️ 서폿</div>
     </nav>
   </div>
 </header>
@@ -443,7 +444,7 @@
 
   <!-- TAB 3 -->
   <div class="tab-content" id="tab-sup">
-    <div class="section-label">챔피언 상대법</div>
+    <div class="section-label">서폿</div>
     <div class="controls">
       <div class="search-wrap">
         <span class="search-icon">🔍</span>
@@ -547,6 +548,11 @@
       <div class="dynamic-list" id="tipsList"></div>
       <button type="button" class="btn-add-field" id="addTipRowBtn">+ 팁 추가</button>
     </div>
+    <div class="form-group">
+      <label class="form-label">카운터 목록</label>
+      <div class="dynamic-list" id="counterList"></div>
+      <button type="button" class="btn-add-field" id="addCounterRowBtn">+ 카운터 추가</button>
+    </div>
     <div class="btn-row">
       <button class="btn btn-secondary" id="champModalCancel">취소</button>
       <button class="btn btn-primary" id="champModalSave">저장</button>
@@ -558,7 +564,7 @@
 <div class="modal-backdrop" id="supModal">
   <div class="modal">
     <div class="modal-title">
-      <span id="supModalTitle">🛡️ 챔피언 상대법 추가</span>
+      <span id="supModalTitle">🛡️ 서폿 추가</span>
       <button class="modal-close" id="supModalClose">✕</button>
     </div>
     <div class="form-group">
@@ -870,7 +876,8 @@ let DATA = {
       "tips": [
         "평타를 칠 수 있는 거리에서 빠르게 콤보로 역병 터트리면서 스킬 쿨 계속 돌리기",
         "역병 최대스택을 쌓을 수 있으면 섞기"
-      ]
+      ],
+      "counters": []
     },
     {
       "name": "케이틀린",
@@ -879,7 +886,8 @@ let DATA = {
       "combos": [],
       "tips": [
         "라인전 오자마자 모든 미니언에 Q긁으면서 라인 푸쉬"
-      ]
+      ],
+      "counters": []
     },
     {
       "name": "자야",
@@ -888,7 +896,8 @@ let DATA = {
       "combos": [
         ["W", "평", "Q", "E"]
       ],
-      "tips": []
+      "tips": [],
+      "counters": []
     }
   ],
   "sup": [
@@ -908,6 +917,7 @@ let adminMode = false;
 let editTarget = { type: null, index: null };
 let champCombosDraft = [];
 let champTipsDraft = [];
+let champCountersDraft = [];
 let supTipsDraft = [];
 
 // ─── 히어로 통계 ───
@@ -1047,7 +1057,12 @@ function buildProfileCardHTML(item, i, showCombos) {
     ? tips.map(t => `<div class="tip-item"><div class="tip-dot"></div><div>${t}</div></div>`).join('')
     : `<div class="dyn-empty">아직 등록된 내용이 없습니다</div>`;
 
-  const subLabel = showCombos ? `챔피언 팁 · ${tips.length}개` : `대응법 · ${tips.length}개`;
+  const counters = item.counters || [];
+  const countersHTML = counters.length
+    ? counters.map(c => `<div class="tip-item"><div class="tip-dot tip-dot-counter"></div><div>${c}</div></div>`).join('')
+    : `<div class="dyn-empty">아직 등록된 내용이 없습니다</div>`;
+
+  const subLabel = showCombos ? `꿀팁 ${tips.length} · 카운터 ${counters.length}` : `대응법 · ${tips.length}개`;
 
   return `
     <div class="profile-header">
@@ -1060,6 +1075,7 @@ function buildProfileCardHTML(item, i, showCombos) {
     <div class="profile-body">
       ${combosHTML ? `<div class="profile-section"><div class="profile-label">콤보 순서</div>${combosHTML}</div>` : ''}
       <div class="profile-section"><div class="profile-label">${showCombos ? '꿀팁' : '대응법'}</div>${tipsHTML}</div>
+      ${showCombos ? `<div class="profile-section"><div class="profile-label">카운터</div>${countersHTML}</div>` : ''}
     </div>
     <div class="profile-admin-btns">
       <button class="card-edit-btn" data-idx="${i}">✏️ 수정</button>
@@ -1287,6 +1303,10 @@ document.getElementById('addTipRowBtn').addEventListener('click', () => {
   champTipsDraft.push('');
   renderTextListRows('tipsList', champTipsDraft);
 });
+document.getElementById('addCounterRowBtn').addEventListener('click', () => {
+  champCountersDraft.push('');
+  renderTextListRows('counterList', champCountersDraft);
+});
 document.getElementById('addSupTipRowBtn').addEventListener('click', () => {
   supTipsDraft.push('');
   renderTextListRows('supTipsList', supTipsDraft);
@@ -1398,8 +1418,10 @@ document.getElementById('champCards').addEventListener('click', e => {
     document.getElementById('f-champ-image').value = c.image || '';
     champCombosDraft = (c.combos || []).map(combo => [...combo]);
     champTipsDraft = [...(c.tips || [])];
+    champCountersDraft = [...(c.counters || [])];
     renderComboListRows();
     renderTextListRows('tipsList', champTipsDraft);
+    renderTextListRows('counterList', champCountersDraft);
     document.getElementById('champModalTitle').textContent = '🏹 챔피언 수정';
     openModal('champModal');
   }
@@ -1422,7 +1444,8 @@ document.getElementById('champModalSave').addEventListener('click', () => {
     icon: document.getElementById('f-champ-icon').value.trim() || '🏹',
     image: document.getElementById('f-champ-image').value.trim() || null,
     combos: champCombosDraft.map(c => c.filter(Boolean)).filter(c => c.length > 0),
-    tips: champTipsDraft.map(t => t.trim()).filter(Boolean)
+    tips: champTipsDraft.map(t => t.trim()).filter(Boolean),
+    counters: champCountersDraft.map(t => t.trim()).filter(Boolean)
   };
   if (editTarget.index !== null) {
     DATA.champ[editTarget.index] = item;
@@ -1451,7 +1474,7 @@ document.getElementById('supCards').addEventListener('click', e => {
     document.getElementById('f-sup-image').value = s.image || '';
     supTipsDraft = [...(s.tips || [])];
     renderTextListRows('supTipsList', supTipsDraft);
-    document.getElementById('supModalTitle').textContent = '🛡️ 챔피언 상대법 수정';
+    document.getElementById('supModalTitle').textContent = '🛡️ 서폿 수정';
     openModal('supModal');
   }
   if (delBtn) {
@@ -1519,8 +1542,10 @@ function injectAdminAddButtons() {
     ['f-champ-name','f-champ-icon','f-champ-image'].forEach(id => document.getElementById(id).value = '');
     champCombosDraft = [];
     champTipsDraft = [];
+    champCountersDraft = [];
     renderComboListRows();
     renderTextListRows('tipsList', champTipsDraft);
+    renderTextListRows('counterList', champCountersDraft);
     document.getElementById('champModalTitle').textContent = '🏹 챔피언 추가';
     openModal('champModal');
   });
@@ -1530,14 +1555,14 @@ function injectAdminAddButtons() {
   addSupBtn.id = 'addSupBtn';
   addSupBtn.className = 'btn btn-primary';
   addSupBtn.style.cssText = 'display:none;margin-bottom:16px;';
-  addSupBtn.textContent = '+ 상대법 추가';
+  addSupBtn.textContent = '+ 서폿 추가';
   supTab.insertBefore(addSupBtn, supTab.firstChild);
   addSupBtn.addEventListener('click', () => {
     editTarget = { type: 'sup', index: null };
     ['f-sup-name','f-sup-icon','f-sup-image'].forEach(id => document.getElementById(id).value = '');
     supTipsDraft = [];
     renderTextListRows('supTipsList', supTipsDraft);
-    document.getElementById('supModalTitle').textContent = '🛡️ 챔피언 상대법 추가';
+    document.getElementById('supModalTitle').textContent = '🛡️ 서폿 추가';
     openModal('supModal');
   });
 
