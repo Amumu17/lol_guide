@@ -2539,7 +2539,7 @@ function renderChampDetail(i) {
         ${c.easyTip ? `<div class="matchup-tip">tip! ${c.easyTip}</div>` : ''}
       </div>
       ${refGridHTML(c.easyMatchups)}
-      ${(c.easyMatchups || []).length > 3 ? '<div class="matchup-scroll-hint">← 더 보기 →</div>' : ''}
+      ${(c.easyMatchups || []).length > 3 ? '<div class="matchup-scroll-hint">←  →</div>' : ''}
     </div>
 
     <div class="matchup-section hard">
@@ -2548,7 +2548,7 @@ function renderChampDetail(i) {
         ${c.hardTip ? `<div class="matchup-tip">tip! ${c.hardTip}</div>` : ''}
       </div>
       ${refGridHTML(c.hardMatchups)}
-      ${(c.hardMatchups || []).length > 3 ? '<div class="matchup-scroll-hint">← 더 보기 →</div>' : ''}
+      ${(c.hardMatchups || []).length > 3 ? '<div class="matchup-scroll-hint">←  →</div>' : ''}
     </div>
 
     <div class="matchup-section synergy">
@@ -2557,7 +2557,7 @@ function renderChampDetail(i) {
         ${c.synergyTip ? `<div class="matchup-tip">tip! ${c.synergyTip}</div>` : ''}
       </div>
       ${refGridHTML(c.synergySupports)}
-      ${(c.synergySupports || []).length > 3 ? '<div class="matchup-scroll-hint">← 더 보기 →</div>' : ''}
+      ${(c.synergySupports || []).length > 3 ? '<div class="matchup-scroll-hint">←  →</div>' : ''}
     </div>
 
     <div class="profile-admin-btns" style="border-top:1px solid var(--border);padding-top:16px;margin-top:4px;">
