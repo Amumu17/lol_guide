@@ -404,32 +404,48 @@
   /* 그리드 뷰 */
   .champ-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
-    gap: 16px 12px;
+    grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
+    gap: 24px 16px;
   }
   .champ-grid-item {
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
     cursor: pointer; user-select: none;
   }
   .champ-grid-item.hidden { display: none; }
   .champ-grid-img {
-    width: 72px; height: 72px; border-radius: 22px;
-    background: var(--surface2);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    width: 104px; height: 104px;
+    border: none;
+    border-radius: 26px;
+    background: transparent;
+    box-shadow: none;
     display: flex; align-items: center; justify-content: center;
-    font-size: 28px; overflow: hidden;
-    transition: transform 0.16s, box-shadow 0.16s;
+    font-size: 36px; overflow: hidden;
+    transition: transform 0.16s, filter 0.16s;
   }
-  .champ-grid-img img { width: 100%; height: 100%; object-fit: cover; }
+  .champ-grid-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    border: none;
+  }
   .champ-grid-item:hover .champ-grid-img,
   .champ-grid-item:active .champ-grid-img {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 22px rgba(0,0,0,0.5);
+    transform: translateY(-4px) scale(1.03);
+    filter: brightness(1.08);
   }
   .champ-grid-name {
-    font-size: 11.5px; font-weight: 700; color: var(--text-dim);
-    text-align: center; line-height: 1.3; max-width: 84px;
+    font-size: 14px; font-weight: 800; color: var(--text);
+    text-align: center; line-height: 1.3; max-width: 116px;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+
+  @media (max-width: 520px) {
+    .champ-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px 10px;
+    }
+    .champ-grid-img { width: 92px; height: 92px; border-radius: 24px; }
+    .champ-grid-name { max-width: 100px; font-size: 13px; }
   }
 
   /* 상세 뷰 */
@@ -504,7 +520,8 @@
   .matchup-grid {
     display: flex; flex-wrap: nowrap; gap: 16px 14px;
     overflow-x: auto; overflow-y: hidden;
-    padding: 2px 2px 10px;
+    /* 배지가 위로 8px 돌출되므로 상단 여백을 확보해 잘리지 않게 한다. */
+    padding: 14px 10px 10px;
     scroll-snap-type: x proximity;
     overscroll-behavior-inline: contain;
     -webkit-overflow-scrolling: touch;
@@ -519,19 +536,43 @@
     align-items: center; gap: 8px; width: 104px;
     scroll-snap-align: start;
   }
+  .matchup-img-wrap {
+    position: relative;
+    width: 76px;
+    height: 76px;
+    overflow: visible;
+  }
   .matchup-img {
     width: 76px; height: 76px; border-radius: 50%; overflow: hidden;
     background: var(--surface2);
     box-shadow: 0 6px 14px rgba(0,0,0,0.4);
     display: flex; align-items: center; justify-content: center; font-size: 22px;
   }
-  .matchup-img img { width: 100%; height: 100%; object-fit: cover; }
-  .matchup-img { position: relative; }
+  .matchup-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .matchup-fallback {
+    width: 100%; height: 100%;
+    align-items: center; justify-content: center;
+    font-size: 28px;
+  }
   .matchup-rank {
-    position: absolute; top: 4px; right: 4px;  z-index: 10; min-width: 22px; height: 22px;
-    padding: 0 6px; border-radius: 999px; display: flex; align-items: center; justify-content: center;
-    background: var(--surface3); border: 1px solid var(--border-strong);
-    color: var(--amber); font-size: 10px; font-weight: 900; box-shadow: var(--shadow-xs);
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    z-index: 10;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 6px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e3b341;
+    border: 2px solid var(--surface);
+    color: #17120a;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.45);
   }
   .matchup-name {
     font-size: 12px; font-weight: 700; color: var(--text-dim); text-align: center;
@@ -2442,12 +2483,16 @@ function refGridHTML(arr) {
     return `<div class="dyn-empty">아직 등록된 챔피언이 없습니다</div>`;
   }
   return `<div class="matchup-grid">${arr.map(r => {
+    const fallbackIcon = r.icon || '⚔️';
     const img = r.image
-      ? `<img src="${r.image}" alt="${r.name}">`
-      : `<span>${r.icon || '⚔️'}</span>`;
+      ? `<img src="${r.image}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="matchup-fallback" style="display:none">${fallbackIcon}</span>`
+      : `<span class="matchup-fallback">${fallbackIcon}</span>`;
     return `
       <div class="matchup-item">
-        <div class="matchup-img">${img}${r.rank ? `<span class="matchup-rank">${r.rank}</span>` : ''}</div>
+        <div class="matchup-img-wrap">
+          <div class="matchup-img">${img}</div>
+          ${r.rank ? `<span class="matchup-rank">${r.rank}</span>` : ''}
+        </div>
         <div class="matchup-name">${r.name || ''}</div>
         ${r.memo ? `<div class="matchup-memo" title="${r.memo}">${r.memo}</div>` : '<div class="matchup-memo"></div>'}
       </div>`;
