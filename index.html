@@ -524,6 +524,13 @@
     display: flex; align-items: center; justify-content: center; font-size: 22px;
   }
   .matchup-img img { width: 100%; height: 100%; object-fit: cover; }
+  .matchup-img { position: relative; }
+  .matchup-rank {
+    position: absolute; top: -3px; right: -3px; min-width: 22px; height: 22px;
+    padding: 0 6px; border-radius: 999px; display: flex; align-items: center; justify-content: center;
+    background: var(--surface3); border: 1px solid var(--border-strong);
+    color: var(--amber); font-size: 10px; font-weight: 900; box-shadow: var(--shadow-xs);
+  }
   .matchup-name {
     font-size: 10.5px; font-weight: 700; color: var(--text-dim); text-align: center;
     line-height: 1.25; max-width: 88px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
@@ -1054,52 +1061,1168 @@ let DATA = {
   ],
   "champ": [
     {
+      "name": "트리스타나",
+      "icon": "🏹",
+      "image": "images/Tristana.png",
+      "combos": [],
+      "tips": [],
+      "easyTip": "",
+      "easyMatchups": [
+        {
+          "name": "유나라",
+          "icon": "⚔️",
+          "image": "images/Yunara.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "진",
+          "icon": "⚔️",
+          "image": "images/Jhin.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "애쉬",
+          "icon": "⚔️",
+          "image": "images/Ashe.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "이즈리얼",
+          "icon": "⚔️",
+          "image": "images/Ezreal.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "hardTip": "",
+      "hardMatchups": [
+        {
+          "name": "자야",
+          "icon": "⚔️",
+          "image": "images/Xayah.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "드레이븐",
+          "icon": "⚔️",
+          "image": "images/Draven.png",
+          "memo": "",
+          "rank": "S"
+        }
+      ],
+      "synergyTip": "",
+      "synergySupports": [
+        {
+          "name": "유미",
+          "icon": "🛡️",
+          "image": "images/Yuumi.png",
+          "memo": ""
+        },
+        {
+          "name": "룰루",
+          "icon": "🛡️",
+          "image": "images/Lulu.png",
+          "memo": ""
+        },
+        {
+          "name": "쓰레쉬",
+          "icon": "🛡️",
+          "image": "images/Thresh.png",
+          "memo": ""
+        },
+        {
+          "name": "블리츠크랭크",
+          "icon": "🛡️",
+          "image": "images/Blitzcrank.png",
+          "memo": ""
+        }
+      ]
+    },
+    {
+      "name": "애쉬",
+      "icon": "🏹",
+      "image": "images/Ashe.png",
+      "combos": [],
+      "tips": [],
+      "easyTip": "",
+      "easyMatchups": [
+        {
+          "name": "바루스",
+          "icon": "⚔️",
+          "image": "images/Varus.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "시비르",
+          "icon": "⚔️",
+          "image": "images/Sivir.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "아펠리오스",
+          "icon": "⚔️",
+          "image": "images/Aphelios.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "이즈리얼",
+          "icon": "⚔️",
+          "image": "images/Ezreal.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "hardTip": "",
+      "hardMatchups": [
+        {
+          "name": "제라스",
+          "icon": "⚔️",
+          "image": "images/Xerath.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "세라핀",
+          "icon": "⚔️",
+          "image": "images/Seraphine.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "트리스타나",
+          "icon": "⚔️",
+          "image": "images/Tristana.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "직스",
+          "icon": "⚔️",
+          "image": "images/Ziggs.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "synergyTip": "",
+      "synergySupports": [
+        {
+          "name": "브라움",
+          "icon": "🛡️",
+          "image": "images/Braum.png",
+          "memo": ""
+        },
+        {
+          "name": "밀리오",
+          "icon": "🛡️",
+          "image": "images/Milio.png",
+          "memo": ""
+        },
+        {
+          "name": "세라핀",
+          "icon": "🛡️",
+          "image": "images/Seraphine.png",
+          "memo": ""
+        },
+        {
+          "name": "쓰레쉬",
+          "icon": "🛡️",
+          "image": "images/Thresh.png",
+          "memo": ""
+        }
+      ]
+    },
+    {
       "name": "바루스",
       "icon": "🏹",
       "image": "images/Varus.png",
-      "combos": [
-        ["R", "평", "E", "평", "평", "W", "Q"]
-      ],
-      "tips": [
-        "평타를 칠 수 있는 거리에서 빠르게 콤보로 역병 터트리면서 스킬 쿨 계속 돌리기",
-        "역병 최대스택을 쌓을 수 있으면 섞기"
-      ],
-      "easyTip": "바루스는 인파이팅 최강이다",
-      "easyMatchups": [],
-      "hardTip": "",
-      "hardMatchups": [],
-      "synergyTip": "",
-      "synergySupports": []
-    },
-    {
-      "name": "케이틀린",
-      "icon": "🔫",
-      "image": "images/Caitlyn.png",
       "combos": [],
-      "tips": [
-        "라인전 오자마자 모든 미니언에 Q긁으면서 라인 푸쉬"
-      ],
+      "tips": [],
       "easyTip": "",
-      "easyMatchups": [],
+      "easyMatchups": [
+        {
+          "name": "루시안",
+          "icon": "⚔️",
+          "image": "images/Lucian.png",
+          "memo": "",
+          "rank": "S"
+        }
+      ],
       "hardTip": "",
-      "hardMatchups": [],
+      "hardMatchups": [
+        {
+          "name": "자야",
+          "icon": "⚔️",
+          "image": "images/Xayah.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "드레이븐",
+          "icon": "⚔️",
+          "image": "images/Draven.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "사미라",
+          "icon": "⚔️",
+          "image": "images/Samira.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "직스",
+          "icon": "⚔️",
+          "image": "images/Ziggs.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "제라스",
+          "icon": "⚔️",
+          "image": "images/Xerath.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
       "synergyTip": "",
-      "synergySupports": []
+      "synergySupports": [
+        {
+          "name": "파이크",
+          "icon": "🛡️",
+          "image": "images/Pyke.png",
+          "memo": ""
+        },
+        {
+          "name": "쓰레쉬",
+          "icon": "🛡️",
+          "image": "images/Thresh.png",
+          "memo": ""
+        },
+        {
+          "name": "카르마",
+          "icon": "🛡️",
+          "image": "images/Karma.png",
+          "memo": ""
+        },
+        {
+          "name": "룰루",
+          "icon": "🛡️",
+          "image": "images/Lulu.png",
+          "memo": ""
+        }
+      ]
     },
     {
       "name": "자야",
       "icon": "🏹",
       "image": "images/Xayah.png",
-      "combos": [
-        ["W", "평", "Q", "E"]
-      ],
+      "combos": [],
       "tips": [],
       "easyTip": "",
-      "easyMatchups": [],
+      "easyMatchups": [
+        {
+          "name": "바루스",
+          "icon": "⚔️",
+          "image": "images/Varus.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "밀",
+          "icon": "⚔️",
+          "image": "images/Mel.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "제리",
+          "icon": "⚔️",
+          "image": "images/Zeri.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "카이사",
+          "icon": "⚔️",
+          "image": "images/Kaisa.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
       "hardTip": "",
-      "hardMatchups": [],
+      "hardMatchups": [
+        {
+          "name": "직스",
+          "icon": "⚔️",
+          "image": "images/Ziggs.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "징크스",
+          "icon": "⚔️",
+          "image": "images/Jinx.png",
+          "memo": "",
+          "rank": "S"
+        }
+      ],
       "synergyTip": "",
-      "synergySupports": []
+      "synergySupports": [
+        {
+          "name": "라칸",
+          "icon": "🛡️",
+          "image": "images/Rakan.png",
+          "memo": ""
+        },
+        {
+          "name": "룰루",
+          "icon": "🛡️",
+          "image": "images/Lulu.png",
+          "memo": ""
+        },
+        {
+          "name": "쓰레쉬",
+          "icon": "🛡️",
+          "image": "images/Thresh.png",
+          "memo": ""
+        },
+        {
+          "name": "레오나",
+          "icon": "🛡️",
+          "image": "images/Leona.png",
+          "memo": ""
+        }
+      ]
+    },
+    {
+      "name": "카이사",
+      "icon": "🏹",
+      "image": "images/Kaisa.png",
+      "combos": [],
+      "tips": [],
+      "easyTip": "",
+      "easyMatchups": [
+        {
+          "name": "밀",
+          "icon": "⚔️",
+          "image": "images/Mel.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "이즈리얼",
+          "icon": "⚔️",
+          "image": "images/Ezreal.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "hardTip": "",
+      "hardMatchups": [
+        {
+          "name": "자야",
+          "icon": "⚔️",
+          "image": "images/Xayah.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "징크스",
+          "icon": "⚔️",
+          "image": "images/Jinx.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "세나",
+          "icon": "⚔️",
+          "image": "images/Senna.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "제리",
+          "icon": "⚔️",
+          "image": "images/Zeri.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "synergyTip": "",
+      "synergySupports": [
+        {
+          "name": "렐",
+          "icon": "🛡️",
+          "image": "images/Rell.png",
+          "memo": ""
+        },
+        {
+          "name": "레오나",
+          "icon": "🛡️",
+          "image": "images/Leona.png",
+          "memo": ""
+        },
+        {
+          "name": "쓰레쉬",
+          "icon": "🛡️",
+          "image": "images/Thresh.png",
+          "memo": ""
+        },
+        {
+          "name": "알리스타",
+          "icon": "🛡️",
+          "image": "images/Alistar.png",
+          "memo": ""
+        }
+      ]
+    },
+    {
+      "name": "징크스",
+      "icon": "🏹",
+      "image": "images/Jinx.png",
+      "combos": [],
+      "tips": [],
+      "easyTip": "",
+      "easyMatchups": [
+        {
+          "name": "제리",
+          "icon": "⚔️",
+          "image": "images/Zeri.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "카이사",
+          "icon": "⚔️",
+          "image": "images/Kaisa.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "이즈리얼",
+          "icon": "⚔️",
+          "image": "images/Ezreal.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "바루스",
+          "icon": "⚔️",
+          "image": "images/Varus.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "hardTip": "",
+      "hardMatchups": [
+        {
+          "name": "직스",
+          "icon": "⚔️",
+          "image": "images/Ziggs.png",
+          "memo": "",
+          "rank": "S"
+        }
+      ],
+      "synergyTip": "",
+      "synergySupports": [
+        {
+          "name": "브라움",
+          "icon": "🛡️",
+          "image": "images/Braum.png",
+          "memo": ""
+        },
+        {
+          "name": "레오나",
+          "icon": "🛡️",
+          "image": "images/Leona.png",
+          "memo": ""
+        },
+        {
+          "name": "쓰레쉬",
+          "icon": "🛡️",
+          "image": "images/Thresh.png",
+          "memo": ""
+        },
+        {
+          "name": "파이크",
+          "icon": "🛡️",
+          "image": "images/Pyke.png",
+          "memo": ""
+        }
+      ]
+    },
+    {
+      "name": "아펠리오스",
+      "icon": "🏹",
+      "image": "images/Aphelios.png",
+      "combos": [],
+      "tips": [],
+      "easyTip": "",
+      "easyMatchups": [
+        {
+          "name": "밀",
+          "icon": "⚔️",
+          "image": "images/Mel.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "카이사",
+          "icon": "⚔️",
+          "image": "images/Kaisa.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "이즈리얼",
+          "icon": "⚔️",
+          "image": "images/Ezreal.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "hardTip": "",
+      "hardMatchups": [
+        {
+          "name": "제라스",
+          "icon": "⚔️",
+          "image": "images/Xerath.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "직스",
+          "icon": "⚔️",
+          "image": "images/Ziggs.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "사미라",
+          "icon": "⚔️",
+          "image": "images/Samira.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "드레이븐",
+          "icon": "⚔️",
+          "image": "images/Draven.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "synergyTip": "",
+      "synergySupports": [
+        {
+          "name": "브라움",
+          "icon": "🛡️",
+          "image": "images/Braum.png",
+          "memo": ""
+        },
+        {
+          "name": "쓰레쉬",
+          "icon": "🛡️",
+          "image": "images/Thresh.png",
+          "memo": ""
+        },
+        {
+          "name": "파이크",
+          "icon": "🛡️",
+          "image": "images/Pyke.png",
+          "memo": ""
+        },
+        {
+          "name": "블리츠크랭크",
+          "icon": "🛡️",
+          "image": "images/Blitzcrank.png",
+          "memo": ""
+        }
+      ]
+    },
+    {
+      "name": "케이틀린",
+      "icon": "🏹",
+      "image": "images/Caitlyn.png",
+      "combos": [],
+      "tips": [],
+      "easyTip": "",
+      "easyMatchups": [
+        {
+          "name": "유나라",
+          "icon": "⚔️",
+          "image": "images/Yunara.png",
+          "memo": "",
+          "rank": "S"
+        }
+      ],
+      "hardTip": "",
+      "hardMatchups": [
+        {
+          "name": "제라스",
+          "icon": "⚔️",
+          "image": "images/Xerath.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "직스",
+          "icon": "⚔️",
+          "image": "images/Ziggs.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "세나",
+          "icon": "⚔️",
+          "image": "images/Senna.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "징크스",
+          "icon": "⚔️",
+          "image": "images/Jinx.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "synergyTip": "",
+      "synergySupports": [
+        {
+          "name": "브라움",
+          "icon": "🛡️",
+          "image": "images/Braum.png",
+          "memo": ""
+        },
+        {
+          "name": "럭스",
+          "icon": "🛡️",
+          "image": "images/Lux.png",
+          "memo": ""
+        },
+        {
+          "name": "쓰레쉬",
+          "icon": "🛡️",
+          "image": "images/Thresh.png",
+          "memo": ""
+        },
+        {
+          "name": "바드",
+          "icon": "🛡️",
+          "image": "images/Bard.png",
+          "memo": ""
+        }
+      ]
+    },
+    {
+      "name": "루시안",
+      "icon": "🏹",
+      "image": "images/Lucian.png",
+      "combos": [],
+      "tips": [],
+      "easyTip": "",
+      "easyMatchups": [
+        {
+          "name": "칼리스타",
+          "icon": "⚔️",
+          "image": "images/Kalista.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "이즈리얼",
+          "icon": "⚔️",
+          "image": "images/Ezreal.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "hardTip": "",
+      "hardMatchups": [
+        {
+          "name": "세나",
+          "icon": "⚔️",
+          "image": "images/Senna.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "제라스",
+          "icon": "⚔️",
+          "image": "images/Xerath.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "아펠리오스",
+          "icon": "⚔️",
+          "image": "images/Aphelios.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "직스",
+          "icon": "⚔️",
+          "image": "images/Ziggs.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "synergyTip": "",
+      "synergySupports": [
+        {
+          "name": "유미",
+          "icon": "🛡️",
+          "image": "images/Yuumi.png",
+          "memo": ""
+        },
+        {
+          "name": "브라움",
+          "icon": "🛡️",
+          "image": "images/Braum.png",
+          "memo": ""
+        },
+        {
+          "name": "레오나",
+          "icon": "🛡️",
+          "image": "images/Leona.png",
+          "memo": ""
+        },
+        {
+          "name": "쓰레쉬",
+          "icon": "🛡️",
+          "image": "images/Thresh.png",
+          "memo": ""
+        }
+      ]
+    },
+    {
+      "name": "시비르",
+      "icon": "🏹",
+      "image": "images/Sivir.png",
+      "combos": [],
+      "tips": [],
+      "easyTip": "",
+      "easyMatchups": [
+        {
+          "name": "바루스",
+          "icon": "⚔️",
+          "image": "images/Varus.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "칼리스타",
+          "icon": "⚔️",
+          "image": "images/Kalista.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "이즈리얼",
+          "icon": "⚔️",
+          "image": "images/Ezreal.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "hardTip": "",
+      "hardMatchups": [
+        {
+          "name": "세나",
+          "icon": "⚔️",
+          "image": "images/Senna.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "애쉬",
+          "icon": "⚔️",
+          "image": "images/Ashe.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "제리",
+          "icon": "⚔️",
+          "image": "images/Zeri.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "synergyTip": "",
+      "synergySupports": [
+        {
+          "name": "유미",
+          "icon": "🛡️",
+          "image": "images/Yuumi.png",
+          "memo": ""
+        },
+        {
+          "name": "룰루",
+          "icon": "🛡️",
+          "image": "images/Lulu.png",
+          "memo": ""
+        },
+        {
+          "name": "카르마",
+          "icon": "🛡️",
+          "image": "images/Karma.png",
+          "memo": ""
+        },
+        {
+          "name": "쓰레쉬",
+          "icon": "🛡️",
+          "image": "images/Thresh.png",
+          "memo": ""
+        }
+      ]
+    },
+    {
+      "name": "코그모",
+      "icon": "🏹",
+      "image": "images/KogMaw.png",
+      "combos": [],
+      "tips": [],
+      "easyTip": "",
+      "easyMatchups": [
+        {
+          "name": "드레이븐",
+          "icon": "⚔️",
+          "image": "images/Draven.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "제리",
+          "icon": "⚔️",
+          "image": "images/Zeri.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "미스 포츈",
+          "icon": "⚔️",
+          "image": "images/MissFortune.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "hardTip": "",
+      "hardMatchups": [
+        {
+          "name": "징크스",
+          "icon": "⚔️",
+          "image": "images/Jinx.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "시비르",
+          "icon": "⚔️",
+          "image": "images/Sivir.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "직스",
+          "icon": "⚔️",
+          "image": "images/Ziggs.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "트위치",
+          "icon": "⚔️",
+          "image": "images/Twitch.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "synergyTip": "",
+      "synergySupports": [
+        {
+          "name": "룰루",
+          "icon": "🛡️",
+          "image": "images/Lulu.png",
+          "memo": ""
+        },
+        {
+          "name": "밀리오",
+          "icon": "🛡️",
+          "image": "images/Milio.png",
+          "memo": ""
+        }
+      ]
+    },
+    {
+      "name": "진",
+      "icon": "🏹",
+      "image": "images/Jhin.png",
+      "combos": [],
+      "tips": [],
+      "easyTip": "",
+      "easyMatchups": [
+        {
+          "name": "밀",
+          "icon": "⚔️",
+          "image": "images/Mel.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "이즈리얼",
+          "icon": "⚔️",
+          "image": "images/Ezreal.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "케이틀린",
+          "icon": "⚔️",
+          "image": "images/Caitlyn.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "hardTip": "",
+      "hardMatchups": [
+        {
+          "name": "트리스타나",
+          "icon": "⚔️",
+          "image": "images/Tristana.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "세나",
+          "icon": "⚔️",
+          "image": "images/Senna.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "징크스",
+          "icon": "⚔️",
+          "image": "images/Jinx.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "제리",
+          "icon": "⚔️",
+          "image": "images/Zeri.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "synergyTip": "",
+      "synergySupports": [
+        {
+          "name": "레오나",
+          "icon": "🛡️",
+          "image": "images/Leona.png",
+          "memo": ""
+        },
+        {
+          "name": "바드",
+          "icon": "🛡️",
+          "image": "images/Bard.png",
+          "memo": ""
+        },
+        {
+          "name": "쓰레쉬",
+          "icon": "🛡️",
+          "image": "images/Thresh.png",
+          "memo": ""
+        },
+        {
+          "name": "카르마",
+          "icon": "🛡️",
+          "image": "images/Karma.png",
+          "memo": ""
+        }
+      ]
+    },
+    {
+      "name": "미스 포츈",
+      "icon": "🏹",
+      "image": "images/MissFortune.png",
+      "combos": [],
+      "tips": [],
+      "easyTip": "",
+      "easyMatchups": [
+        {
+          "name": "바루스",
+          "icon": "⚔️",
+          "image": "images/Varus.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "밀",
+          "icon": "⚔️",
+          "image": "images/Mel.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "유나라",
+          "icon": "⚔️",
+          "image": "images/Yunara.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "아펠리오스",
+          "icon": "⚔️",
+          "image": "images/Aphelios.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "hardTip": "",
+      "hardMatchups": [
+        {
+          "name": "제라스",
+          "icon": "⚔️",
+          "image": "images/Xerath.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "직스",
+          "icon": "⚔️",
+          "image": "images/Ziggs.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "세나",
+          "icon": "⚔️",
+          "image": "images/Senna.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "제리",
+          "icon": "⚔️",
+          "image": "images/Zeri.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "synergyTip": "",
+      "synergySupports": [
+        {
+          "name": "레오나",
+          "icon": "🛡️",
+          "image": "images/Leona.png",
+          "memo": ""
+        },
+        {
+          "name": "렐",
+          "icon": "🛡️",
+          "image": "images/Rell.png",
+          "memo": ""
+        },
+        {
+          "name": "쓰레쉬",
+          "icon": "🛡️",
+          "image": "images/Thresh.png",
+          "memo": ""
+        },
+        {
+          "name": "파이크",
+          "icon": "🛡️",
+          "image": "images/Pyke.png",
+          "memo": ""
+        }
+      ]
+    },
+    {
+      "name": "세나",
+      "icon": "🏹",
+      "image": "images/Senna.png",
+      "combos": [],
+      "tips": [],
+      "easyTip": "",
+      "easyMatchups": [
+        {
+          "name": "밀",
+          "icon": "⚔️",
+          "image": "images/Mel.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "이즈리얼",
+          "icon": "⚔️",
+          "image": "images/Ezreal.png",
+          "memo": "",
+          "rank": "S"
+        },
+        {
+          "name": "바루스",
+          "icon": "⚔️",
+          "image": "images/Varus.png",
+          "memo": "",
+          "rank": "A"
+        },
+        {
+          "name": "루시안",
+          "icon": "⚔️",
+          "image": "images/Lucian.png",
+          "memo": "",
+          "rank": "A"
+        }
+      ],
+      "hardTip": "",
+      "hardMatchups": [
+        {
+          "name": "트리스타나",
+          "icon": "⚔️",
+          "image": "images/Tristana.png",
+          "memo": "",
+          "rank": "S"
+        }
+      ],
+      "synergyTip": "",
+      "synergySupports": [
+        {
+          "name": "레오나",
+          "icon": "🛡️",
+          "image": "images/Leona.png",
+          "memo": ""
+        },
+        {
+          "name": "브라움",
+          "icon": "🛡️",
+          "image": "images/Braum.png",
+          "memo": ""
+        },
+        {
+          "name": "알리스타",
+          "icon": "🛡️",
+          "image": "images/Alistar.png",
+          "memo": ""
+        },
+        {
+          "name": "쓰레쉬",
+          "icon": "🛡️",
+          "image": "images/Thresh.png",
+          "memo": ""
+        }
+      ]
     }
   ],
   "sup": [
@@ -1328,7 +2451,7 @@ function refGridHTML(arr) {
       : `<span>${r.icon || '⚔️'}</span>`;
     return `
       <div class="matchup-item">
-        <div class="matchup-img">${img}</div>
+        <div class="matchup-img">${img}${r.rank ? `<span class="matchup-rank">${r.rank}</span>` : ''}</div>
         <div class="matchup-name">${r.name || ''}</div>
         ${r.memo ? `<div class="matchup-memo" title="${r.memo}">${r.memo}</div>` : '<div class="matchup-memo"></div>'}
       </div>`;
@@ -1416,7 +2539,7 @@ function renderChampDetail(i) {
         ${c.easyTip ? `<div class="matchup-tip">tip! ${c.easyTip}</div>` : ''}
       </div>
       ${refGridHTML(c.easyMatchups)}
-      ${(c.easyMatchups || []).length > 3 ? '<div class="matchup-scroll-hint">← 옆으로 드래그해 더 보기 →</div>' : ''}
+      ${(c.easyMatchups || []).length > 3 ? '<div class="matchup-scroll-hint">← 더 보기 →</div>' : ''}
     </div>
 
     <div class="matchup-section hard">
@@ -1425,7 +2548,7 @@ function renderChampDetail(i) {
         ${c.hardTip ? `<div class="matchup-tip">tip! ${c.hardTip}</div>` : ''}
       </div>
       ${refGridHTML(c.hardMatchups)}
-      ${(c.hardMatchups || []).length > 3 ? '<div class="matchup-scroll-hint">← 옆으로 드래그해 더 보기 →</div>' : ''}
+      ${(c.hardMatchups || []).length > 3 ? '<div class="matchup-scroll-hint">← 더 보기 →</div>' : ''}
     </div>
 
     <div class="matchup-section synergy">
@@ -1434,7 +2557,7 @@ function renderChampDetail(i) {
         ${c.synergyTip ? `<div class="matchup-tip">tip! ${c.synergyTip}</div>` : ''}
       </div>
       ${refGridHTML(c.synergySupports)}
-      ${(c.synergySupports || []).length > 3 ? '<div class="matchup-scroll-hint">← 옆으로 드래그해 더 보기 →</div>' : ''}
+      ${(c.synergySupports || []).length > 3 ? '<div class="matchup-scroll-hint">← 더 보기 →</div>' : ''}
     </div>
 
     <div class="profile-admin-btns" style="border-top:1px solid var(--border);padding-top:16px;margin-top:4px;">
